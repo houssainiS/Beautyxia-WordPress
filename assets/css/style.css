@@ -6,17 +6,11 @@
 }
 
 .face-analysis-plugin * {
-  all: revert;
+
   box-sizing: border-box;
 }
 
-.face-analysis-plugin button {
-  all: revert;
-}
 
-.face-analysis-plugin input {
-  all: revert;
-}
 
 /* Language selector styling */
 .face-analysis-plugin .header-content {
