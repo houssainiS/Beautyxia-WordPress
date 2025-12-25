@@ -1,0 +1,1382 @@
+/* Added .face-analysis-plugin wrapper to isolate styles from WordPress theme */
+.face-analysis-plugin {
+  all: initial;
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.face-analysis-plugin * {
+
+  box-sizing: border-box;
+}
+
+
+
+/* Language selector styling */
+.face-analysis-plugin .header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.face-analysis-plugin .title-section {
+  flex: 1;
+}
+
+.face-analysis-plugin .lang-selector {
+  display: flex;
+  border: 2px solid #c9cccf;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 96px;
+  min-width: 96px;
+  max-width: 96px;
+  flex-shrink: 0;
+  position: relative;
+  box-sizing: border-box;
+  direction: ltr;
+}
+
+.face-analysis-plugin .lang-selector-btn {
+  flex: 1;
+  flex-basis: 32px;
+  padding: 6px 4px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  border: none;
+  background: #fff;
+  transition: background 0.3s, color 0.3s;
+  font-size: 12px;
+  width: 32px;
+  min-width: 32px;
+  max-width: 32px;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+}
+
+.face-analysis-plugin .lang-selector-btn:not(:last-child) {
+  border-right: 1px solid #c9cccf;
+  direction: ltr;
+}
+
+.face-analysis-plugin .lang-selector-btn.active {
+  background: #202223;
+  color: #fff;
+  direction: ltr;
+}
+
+.face-analysis-plugin .lang-selector-btn:hover:not(.active) {
+  background: #f0f0f0;
+}
+
+.face-analysis-plugin .my-app-container[dir="rtl"] .header-content {
+  flex-direction: row-reverse;
+}
+
+.face-analysis-plugin .my-app-container[dir="rtl"] .eye-colors {
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 640px) {
+  .face-analysis-plugin .header-content {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .face-analysis-plugin .lang-selector {
+    align-self: flex-end;
+    width: 96px;
+  }
+
+  .face-analysis-plugin .my-app-container[dir="rtl"] .header-content {
+    flex-direction: column;
+  }
+
+  .face-analysis-plugin .my-app-container[dir="ltr"] .lang-selector {
+    align-self: flex-start;
+    width: 96px;
+  }
+}
+
+/* General container and card styling */
+.face-analysis-plugin .face-analysis-container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background-color: white;
+  min-height: 100vh;
+}
+
+.face-analysis-plugin .my-app-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+@media (min-width: 640px) {
+  .face-analysis-plugin .face-analysis-container {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .face-analysis-plugin .face-analysis-container {
+    padding: 2rem;
+  }
+}
+
+.face-analysis-plugin .face-analysis-card {
+  width: 100%;
+  max-width: 48rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e1e3e5;
+  box-shadow: 0 1px 0 0 rgba(22, 29, 37, 0.05);
+  overflow: hidden;
+}
+
+/* Header styling */
+.face-analysis-plugin .face-analysis-header {
+  text-align: left;
+  padding: 20px 20px 16px 20px;
+  border-bottom: 1px solid #e1e3e5;
+  background-color: #ffffff;
+}
+
+.face-analysis-plugin .face-analysis-title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #202223;
+  margin: 0 0 4px 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.face-analysis-plugin .face-analysis-description {
+  font-size: 14px;
+  color: #6d7175;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Body content styling */
+.face-analysis-plugin .face-analysis-body {
+  padding: 20px;
+  display: grid;
+  gap: 20px;
+}
+
+/* Image preview styling */
+.face-analysis-plugin .face-analysis-preview {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border: 2px dashed #c9cccf;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #f6f6f7;
+}
+
+.face-analysis-plugin .preview-image {
+  object-fit: contain;
+  max-height: 100%;
+  max-width: 100%;
+  display: block;
+}
+
+.face-analysis-plugin .preview-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 256px;
+  border: 2px dashed #c9cccf;
+  border-radius: 12px;
+  background-color: #f6f6f7;
+  color: #6d7175;
+  transition: all 0.2s ease;
+}
+
+.face-analysis-plugin .preview-placeholder:hover {
+  border-color: #202223;
+  background-color: #f1f2f3;
+}
+
+.face-analysis-plugin .face-icon {
+  color: #6d7175;
+  margin-bottom: 12px;
+  width: 64px;
+  height: 64px;
+  stroke: #6d7175;
+}
+
+.face-analysis-plugin .preview-placeholder p {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Upload section styling */
+.face-analysis-plugin .upload-section {
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  align-items: center;
+  gap: 12px;
+}
+
+.face-analysis-plugin .hidden-file {
+  display: none;
+}
+
+.face-analysis-plugin .upload-button,
+.face-analysis-plugin .analyze-button,
+.face-analysis-plugin .webcam-button,
+.face-analysis-plugin .capture-button,
+.face-analysis-plugin .stop-camera-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.4;
+}
+
+.face-analysis-plugin .upload-button {
+  background-color: #ffffff;
+  color: #202223;
+  border: 1px solid #c9cccf;
+}
+
+.face-analysis-plugin .upload-button:hover {
+  background-color: #f6f6f7;
+  border-color: #8c9196;
+}
+
+.face-analysis-plugin .webcam-button {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: 1px solid #2563eb;
+}
+
+.face-analysis-plugin .webcam-button:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.face-analysis-plugin .capture-button {
+  background-color: #16a34a;
+  color: #ffffff;
+  border: 1px solid #16a34a;
+}
+
+.face-analysis-plugin .capture-button:hover {
+  background-color: #15803d;
+  border-color: #15803d;
+}
+
+.face-analysis-plugin .stop-camera-button {
+  background-color: #dc2626;
+  color: #ffffff;
+  border: 1px solid #dc2626;
+}
+
+.face-analysis-plugin .stop-camera-button:hover {
+  background-color: #b91c1c;
+  border-color: #b91c1c;
+}
+
+.face-analysis-plugin .analyze-button {
+  background-color: #202223;
+  color: #ffffff;
+  border: 1px solid #202223;
+}
+
+.face-analysis-plugin .analyze-button:hover:not(:disabled) {
+  background-color: #000000;
+  border-color: #000000;
+}
+
+.face-analysis-plugin .analyze-button:disabled {
+  background-color: #e1e3e5;
+  color: #8c9196;
+  border-color: #e1e3e5;
+  cursor: not-allowed;
+}
+
+.face-analysis-plugin .icon-upload {
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.face-analysis-plugin .upload-note {
+  font-size: 13px;
+  color: #6d7175;
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Buttons and icon sizing */
+.face-analysis-plugin .upload-button svg,
+.face-analysis-plugin .webcam-button svg,
+.face-analysis-plugin .capture-button svg,
+.face-analysis-plugin .stop-camera-button svg,
+.face-analysis-plugin .analyze-button svg {
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0;
+  color: inherit;
+  stroke: currentColor;
+}
+
+.face-analysis-plugin .btn-feedback-positive svg,
+.face-analysis-plugin .btn-feedback-negative svg {
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0;
+  stroke: currentColor;
+}
+
+.face-analysis-plugin .icon-upload {
+  margin-right: 8px;
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0;
+}
+
+/* Fixed tip icon sizing - was overriding to 12px */
+.face-analysis-plugin .tip-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #f59e0b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.face-analysis-plugin .tip-icon svg {
+  width: 16px !important;
+  height: 16px !important;
+  color: #ffffff;
+  stroke: #ffffff;
+}
+
+/* Card icons */
+.face-analysis-plugin .card-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #f0f9ff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.face-analysis-plugin .card-icon svg {
+  color: #2563eb;
+  width: 20px !important;
+  height: 20px !important;
+  stroke: #2563eb;
+}
+
+/* Face icon in preview */
+.face-analysis-plugin .face-icon {
+  color: #6d7175;
+  margin-bottom: 12px;
+  width: 64px !important;
+  height: 64px !important;
+  stroke: #6d7175;
+}
+
+/* Badge icons */
+.face-analysis-plugin .face-badge svg {
+  color: #ffffff;
+  width: 12px !important;
+  height: 12px !important;
+  stroke: #ffffff;
+}
+
+/* Image icons */
+.face-analysis-plugin .image-icon svg {
+  color: #2563eb;
+  width: 16px !important;
+  height: 16px !important;
+  stroke: #2563eb;
+}
+
+/* Results icon */
+.face-analysis-plugin .results-icon svg {
+  color: #2563eb;
+  width: 24px !important;
+  height: 24px !important;
+  stroke: #2563eb;
+}
+
+/* Tips header icon */
+.face-analysis-plugin .tips-icon svg {
+  color: #f59e0b;
+  width: 24px !important;
+  height: 24px !important;
+  stroke: #f59e0b;
+}
+
+/* No issues icon */
+.face-analysis-plugin .no-issues-icon svg {
+  color: #ffffff;
+  width: 16px !important;
+  height: 16px !important;
+  stroke: #ffffff;
+}
+
+/* Feedback header icon */
+.face-analysis-plugin .feedback-header svg {
+  width: 24px !important;
+  height: 24px !important;
+  stroke: currentColor;
+}
+
+/* Results section styling */
+.face-analysis-plugin .results-section {
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.face-analysis-plugin .results-header {
+  text-align: center;
+  padding: 20px 0 30px 0;
+  border-bottom: 1px solid #e1e3e5;
+  margin-bottom: 30px;
+}
+
+.face-analysis-plugin .results-icon {
+  width: 48px;
+  height: 48px;
+  background-color: #f0f9ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px auto;
+}
+
+.face-analysis-plugin .results-icon svg {
+  color: #2563eb;
+  width: 24px;
+  height: 24px;
+}
+
+.face-analysis-plugin .results-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #202223;
+  margin: 0 0 8px 0;
+}
+
+.face-analysis-plugin .results-header p {
+  font-size: 14px;
+  color: #6d7175;
+  margin: 0;
+}
+
+/* Face display styling */
+.face-analysis-plugin .face-display {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.face-analysis-plugin .face-frame {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #00d4aa;
+}
+
+.face-analysis-plugin .face-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.face-analysis-plugin .face-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 24px;
+  height: 24px;
+  background-color: #00d4aa;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+}
+
+.face-analysis-plugin .face-badge svg {
+  color: #ffffff;
+  width: 12px;
+  height: 12px;
+}
+
+.face-analysis-plugin .face-info h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #202223;
+  margin: 0 0 4px 0;
+}
+
+.face-analysis-plugin .face-info p {
+  font-size: 14px;
+  color: #6d7175;
+  margin: 0;
+}
+
+/* Result cards styling */
+.face-analysis-plugin .result-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.face-analysis-plugin .result-card {
+  background: #ffffff;
+  border: 1px solid #e1e3e5;
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+
+.face-analysis-plugin .result-card:hover {
+  border-color: #c9cccf;
+  box-shadow: 0 2px 8px rgba(22, 29, 37, 0.1);
+}
+
+.face-analysis-plugin .result-card .card-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #f0f9ff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.face-analysis-plugin .result-card .card-icon svg {
+  color: #2563eb;
+  width: 20px;
+  height: 20px;
+}
+
+.face-analysis-plugin .result-card h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #202223;
+  margin: 0 0 8px 0;
+}
+
+/* Probability bars styling */
+.face-analysis-plugin .probability-bars {
+  margin-top: 16px;
+}
+
+.face-analysis-plugin .probability-bar {
+  margin-bottom: 12px;
+}
+
+.face-analysis-plugin .prob-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #6d7175;
+  margin-bottom: 4px;
+}
+
+.face-analysis-plugin .prob-track {
+  height: 6px;
+  background-color: #e1e3e5;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.face-analysis-plugin .prob-fill {
+  height: 100%;
+  background-color: #2563eb;
+  border-radius: 3px;
+  transition: width 0.8s ease;
+}
+
+/* Eye colors styling */
+.face-analysis-plugin .eye-colors {
+  display: flex;
+  gap: 16px;
+}
+
+.face-analysis-plugin .eye-color {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.face-analysis-plugin .eye-label {
+  font-size: 12px;
+  color: #6d7175;
+  font-weight: 500;
+}
+
+.face-analysis-plugin .eye-value {
+  font-size: 14px;
+  color: #202223;
+  font-weight: 600;
+  padding: 4px 8px;
+  background-color: #f6f6f7;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* Acne analysis styling */
+.face-analysis-plugin .acne-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.face-analysis-plugin .acne-level {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.face-analysis-plugin .acne-value {
+  font-weight: 600;
+  color: #202223;
+}
+
+.face-analysis-plugin .confidence-meter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.face-analysis-plugin .confidence-bar {
+  flex: 1;
+  height: 8px;
+  background-color: #e1e3e5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.face-analysis-plugin .confidence-fill {
+  height: 100%;
+  background-color: #f59e0b;
+  border-radius: 4px;
+  transition: width 0.8s ease;
+}
+
+.face-analysis-plugin .confidence-text {
+  font-size: 12px;
+  color: #6d7175;
+  font-weight: 500;
+  min-width: 40px;
+}
+
+/* Detected issues styling */
+.face-analysis-plugin .detected-issues {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.face-analysis-plugin .issue-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f2f3;
+}
+
+.face-analysis-plugin .issue-item:last-child {
+  border-bottom: none;
+}
+
+.face-analysis-plugin .issue-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.face-analysis-plugin .issue-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #202223;
+}
+
+.face-analysis-plugin .issue-count {
+  font-size: 12px;
+  color: #6d7175;
+}
+
+.face-analysis-plugin .issue-confidence {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 80px;
+}
+
+.face-analysis-plugin .issue-confidence .confidence-bar {
+  width: 40px;
+  height: 4px;
+}
+
+.face-analysis-plugin .issue-confidence .confidence-text {
+  font-size: 11px;
+}
+
+/* No issues message styling */
+.face-analysis-plugin .no-issues-message {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  color: #15803d;
+}
+
+.face-analysis-plugin .no-issues-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #16a34a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.face-analysis-plugin .no-issues-icon svg {
+  color: #ffffff;
+  width: 16px;
+  height: 16px;
+}
+
+.face-analysis-plugin .no-issues-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Analysis images section */
+.face-analysis-plugin .analysis-images-section {
+  margin-top: 40px;
+  padding: 30px 20px;
+  background-color: #ffffff;
+  border: 1px solid #e1e3e5;
+  border-radius: 12px;
+}
+
+.face-analysis-plugin .images-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.face-analysis-plugin .images-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #202223;
+  margin: 0 0 8px 0;
+}
+
+.face-analysis-plugin .images-header p {
+  font-size: 14px;
+  color: #6d7175;
+  margin: 0;
+}
+
+.face-analysis-plugin .analysis-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.face-analysis-plugin .analysis-image-card {
+  background: #ffffff;
+  border: 1px solid #e1e3e5;
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+
+.face-analysis-plugin .analysis-image-card:hover {
+  border-color: #c9cccf;
+  box-shadow: 0 2px 8px rgba(22, 29, 37, 0.1);
+}
+
+.face-analysis-plugin .image-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.face-analysis-plugin .image-icon {
+  width: 32px;
+  height: 32px;
+  background-color: #f0f9ff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.face-analysis-plugin .image-icon svg {
+  color: #2563eb;
+  width: 16px;
+  height: 16px;
+}
+
+.face-analysis-plugin .image-title h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #202223;
+  margin: 0 0 2px 0;
+}
+
+.face-analysis-plugin .image-title p {
+  font-size: 12px;
+  color: #6d7175;
+  margin: 0;
+}
+
+.face-analysis-plugin .image-container {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e1e3e5;
+  min-height: 200px;
+  background-color: #f6f6f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.face-analysis-plugin .image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  min-width: 100px;
+}
+
+/* Tips section styling */
+.face-analysis-plugin .tips-section {
+  margin-top: 40px;
+  padding: 30px 20px;
+  background-color: #ffffff;
+  border: 1px solid #e1e3e5;
+  border-radius: 12px;
+}
+
+.face-analysis-plugin .tips-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e1e3e5;
+}
+
+.face-analysis-plugin .tips-icon {
+  width: 48px;
+  height: 48px;
+  background-color: #fef3c7;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.face-analysis-plugin .tips-icon svg {
+  color: #f59e0b;
+  width: 24px;
+  height: 24px;
+}
+
+.face-analysis-plugin .tips-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #202223;
+  margin: 0 0 4px 0;
+}
+
+.face-analysis-plugin .tips-header p {
+  font-size: 14px;
+  color: #6d7175;
+  margin: 0;
+}
+
+.face-analysis-plugin .tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background-color: #fefbf3;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+}
+
+.face-analysis-plugin .tip-item:hover {
+  background-color: #fef3c7;
+  border-color: #fbbf24;
+}
+
+.face-analysis-plugin .tip-item:last-child {
+  margin-bottom: 0;
+}
+
+.face-analysis-plugin .tip-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #f59e0b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.face-analysis-plugin .tip-icon svg {
+  color: #ffffff;
+  width: 16px;
+  height: 16px;
+  stroke: #ffffff;
+}
+
+.face-analysis-plugin .tip-text {
+  font-size: 14px;
+  color: #202223;
+  line-height: 1.5;
+}
+
+/* Webcam section styling */
+.face-analysis-plugin .webcam-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+  border: 1px solid #e1e3e5;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f6f6f7;
+  width: 256px;
+  height: 256px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.face-analysis-plugin .webcam-section video {
+  width: 256px;
+  height: 256px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Loading animation styles */
+.face-analysis-plugin .loading-section {
+  padding: 2rem;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e1e3e5;
+  margin: 1rem 0;
+}
+
+.face-analysis-plugin .loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.face-analysis-plugin .loading-spinner {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.face-analysis-plugin .spinner-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-top: 3px solid #202223;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+.face-analysis-plugin .spinner-ring:nth-child(2) {
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  border-top-color: #202223;
+  opacity: 0.7;
+  animation-delay: -0.4s;
+}
+
+.face-analysis-plugin .spinner-ring:nth-child(3) {
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  left: 20%;
+  border-top-color: #202223;
+  opacity: 0.4;
+  animation-delay: -0.8s;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.face-analysis-plugin .loading-text h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #202223;
+}
+
+.face-analysis-plugin .loading-text p {
+  margin: 0;
+  color: #6d7175;
+  font-size: 0.875rem;
+}
+
+/* GDPR consent section styling */
+.face-analysis-plugin .gdpr-consent-section {
+  margin: 16px 0;
+  padding: 16px;
+  background-color: #f6f6f7;
+  border: 1px solid #e1e3e5;
+  border-radius: 8px;
+}
+
+.face-analysis-plugin .consent-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.face-analysis-plugin .consent-checkbox input[type="checkbox"] {
+  margin: 0;
+  margin-top: 2px;
+  width: 16px;
+  height: 16px;
+  accent-color: #202223;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.face-analysis-plugin .consent-checkbox label {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #202223;
+  cursor: pointer;
+  margin: 0;
+}
+
+.face-analysis-plugin .privacy-policy-link {
+  font-size: 13px;
+  color: #6d7175;
+  margin: 0;
+  text-align: center;
+}
+
+.face-analysis-plugin .privacy-policy-link a {
+  color: #2563eb;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.face-analysis-plugin .privacy-policy-link a:hover {
+  color: #1d4ed8;
+  text-decoration: none;
+}
+
+/* Feedback Section Styling */
+.face-analysis-plugin .feedback-section {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #e1e3e5;
+  border-radius: 12px;
+}
+
+.face-analysis-plugin .feedback-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.face-analysis-plugin .feedback-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #202223;
+  margin: 0;
+}
+
+.face-analysis-plugin .feedback-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.face-analysis-plugin .btn-feedback-positive,
+.face-analysis-plugin .btn-feedback-negative {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid #e1e3e5;
+  background-color: #ffffff;
+  color: #202223;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.face-analysis-plugin .btn-feedback-positive:hover:not(:disabled) {
+  background-color: #f0fdf4;
+  border-color: #16a34a;
+  color: #16a34a;
+}
+
+.face-analysis-plugin .btn-feedback-positive svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.face-analysis-plugin .btn-feedback-negative:hover:not(:disabled) {
+  background-color: #fef2f2;
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.face-analysis-plugin .btn-feedback-negative svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.face-analysis-plugin .btn-feedback-positive:disabled,
+.face-analysis-plugin .btn-feedback-negative:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.face-analysis-plugin .feedback-message {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  color: #15803d;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .face-analysis-plugin .feedback-buttons {
+    flex-direction: column;
+  }
+
+  .face-analysis-plugin .btn-feedback-positive,
+  .face-analysis-plugin .btn-feedback-negative {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Focus states for accessibility */
+.face-analysis-plugin .upload-button:focus,
+.face-analysis-plugin .analyze-button:focus,
+.face-analysis-plugin .webcam-button:focus,
+.face-analysis-plugin .capture-button:focus,
+.face-analysis-plugin .stop-camera-button:focus,
+.face-analysis-plugin .lang-selector-btn:focus {
+  outline-offset: 2px;
+}
+
+.face-analysis-plugin .hidden-file:focus + .upload-button {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* fix SVG icons - add fill and ensure full icon visibility */
+.face-analysis-plugin svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ensure all button SVGs display properly */
+.face-analysis-plugin .upload-button svg,
+.face-analysis-plugin .webcam-button svg,
+.face-analysis-plugin .capture-button svg,
+.face-analysis-plugin .stop-camera-button svg,
+.face-analysis-plugin .analyze-button svg {
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0;
+  color: inherit;
+  stroke: currentColor !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+}
+
+/* fix tip icon SVG to show sun properly */
+.face-analysis-plugin .tip-icon svg {
+  color: #ffffff;
+  width: 16px !important;
+  height: 16px !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+}
+
+/* fix card icon SVG display */
+.face-analysis-plugin .card-icon svg {
+  color: #2563eb;
+  width: 20px !important;
+  height: 20px !important;
+  stroke: #2563eb !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+}
+
+/* fix face icon in preview */
+.face-analysis-plugin .face-icon {
+  color: #6d7175;
+  margin-bottom: 12px;
+  width: 64px !important;
+  height: 64px !important;
+  stroke: #6d7175 !important;
+  fill: none !important;
+  stroke-width: 1.5 !important;
+}
+
+/* fix results icon */
+.face-analysis-plugin .results-icon svg {
+  color: #2563eb;
+  width: 24px !important;
+  height: 24px !important;
+  stroke: #2563eb !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+}
+
+/* fix tips header icon */
+.face-analysis-plugin .tips-icon svg {
+  color: #f59e0b;
+  width: 24px !important;
+  height: 24px !important;
+  stroke: #f59e0b !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+}
+
+/* fix image icon display */
+.face-analysis-plugin .image-icon svg {
+  color: #2563eb;
+  width: 16px !important;
+  height: 16px !important;
+  stroke: #2563eb !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+}
+
+/* fix no issues icon */
+.face-analysis-plugin .no-issues-icon svg {
+  color: #ffffff;
+  width: 16px !important;
+  height: 16px !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+}
+
+/* fix feedback icons */
+.face-analysis-plugin .btn-feedback-positive svg,
+.face-analysis-plugin .btn-feedback-negative svg {
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0;
+  stroke: currentColor !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+}
+
+/* badge icon styling */
+.face-analysis-plugin .face-badge svg {
+  color: #ffffff;
+  width: 12px !important;
+  height: 12px !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+}
