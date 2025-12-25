@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
       Object.entries(issueGroups).forEach(([issueClass, data]) => {
         const avgConfidence = (data.totalConfidence / data.count).toFixed(1)
         const areaText = data.count > 1 ? "areas" : "area"
-        const formattedClass = issueClass.replace(/_/g, "_").toLowerCase()
+        const formattedClass = issueClass.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())
 
         const issueHTML = `
           <div class="issue-item">
@@ -299,7 +299,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <path d="M9 12l2 2 4-4"/>
             </svg>
           </div>
-          <span class="no-issues-text">${translations[currentLanguage].no_issues || "No significant issues detected"}</span>
+          <span class="no-issues-text">${translations[currentLanguage].no_issues_detected || "No significant issues detected"}</span>
         </div>
       `
     }
@@ -365,10 +365,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function regenerateTipsForLanguage(data, language) {
-    // Implementation for regenerating tips
-    return []
-  }
+
 
   function initializeFeedbackHandlers() {
     const likeBtn = document.getElementById("likeBtn")

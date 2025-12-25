@@ -2,6 +2,7 @@
 /**
  * Tips Generator Class
  * Generates personalized beauty tips based on analysis results
+ * Synchronized with tips.js and includes all original content
  */
 
 class Tips_Generator {
@@ -86,7 +87,110 @@ class Tips_Generator {
             ),
         ),
     );
-    
+
+    private static $eye_color_tips = array(
+        'Brown' => array(
+            'en' => array(
+                "Enhance brown eyes with warm eyeshadow tones like gold, bronze, and copper.",
+                "Purple and plum shades create beautiful contrast with brown eyes.",
+                "Try navy blue eyeliner instead of black for a softer look.",
+                "Green eyeshadows can make brown eyes appear more vibrant.",
+            ),
+            'fr' => array(
+                "Rehaussez les yeux bruns avec des tons d'ombre à paupières chauds comme l'or, le bronze et le cuivre.",
+                "Les nuances violettes et prune créent un beau contraste avec les yeux bruns.",
+                "Essayez l'eye-liner bleu marine au lieu du noir pour un look plus doux.",
+                "Les ombres à paupières vertes peuvent faire paraître les yeux bruns plus vibrants.",
+            ),
+            'ar' => array(
+                "عزز العيون البنية بألوان ظلال العيون الدافئة مثل الذهبي والبرونزي والنحاسي.",
+                "الألوان البنفسجية والخوخية تخلق تباين جميل مع العيون البنية.",
+                "جرب كحل العيون الأزرق الداكن بدلاً من الأسود للحصول على مظهر أنعم.",
+                "ظلال العيون الخضراء يمكن أن تجعل العيون البنية تبدو أكثر حيوية.",
+            ),
+        ),
+        'Blue' => array(
+            'en' => array(
+                "Warm tones like peach, coral, and bronze complement blue eyes beautifully.",
+                "Orange and copper eyeshadows make blue eyes pop.",
+                "Brown eyeliner can be more flattering than black for everyday wear.",
+                "Avoid blue eyeshadows that match your eye color exactly.",
+            ),
+            'fr' => array(
+                "Les tons chauds comme la pêche, le corail et le bronze complètent magnifiquement les yeux bleus.",
+                "Les ombres à paupières orange et cuivre font ressortir les yeux bleus.",
+                "L'eye-liner brun peut être plus flatteur que le noir pour un usage quotidien.",
+                "Évitez les ombres à paupières bleues qui correspondent exactement à votre couleur d'yeux.",
+            ),
+            'ar' => array(
+                "الألوان الدافئة مثل الخوخي والمرجاني والبرونزي تكمل العيون الزرقاء بشكل جميل.",
+                "ظلال العيون البرتقالية والنحاسية تجعل العيون الزرقاء تبرز.",
+                "كحل العيون البني يمكن أن يكون أكثر إطراءً من الأسود للاستخدام اليومي.",
+                "تجنب ظلال العيون الزرقاء التي تطابق لون عينيك تماماً.",
+            ),
+        ),
+        'Green' => array(
+            'en' => array(
+                "Purple and plum shades are perfect for making green eyes stand out.",
+                "Red and pink tones create stunning contrast with green eyes.",
+                "Golden and bronze shades enhance the warmth in green eyes.",
+                "Brown eyeliner often looks more natural than black with green eyes.",
+            ),
+            'fr' => array(
+                "Les nuances violettes et prune sont parfaites pour faire ressortir les yeux verts.",
+                "Les tons rouges et roses créent un contraste saisissant avec les yeux verts.",
+                "Les nuances dorées et bronze rehaussent la chaleur des yeux verts.",
+                "L'eye-liner brun paraît souvent plus naturel que le noir avec les yeux verts.",
+            ),
+            'ar' => array(
+                "الألوان البنفسجية والخوخية مثالية لإبراز العيون الخضراء.",
+                "الألوان الحمراء والوردية تخلق تباين مذهل مع العيون الخضراء.",
+                "الألوان الذهبية والبرونزية تعزز الدفء في العيون الخضراء.",
+                "كحل العيون البني غالباً ما يبدو أكثر طبيعية من الأسود مع العيون الخضراء.",
+            ),
+        ),
+        'Hazel' => array(
+            'en' => array(
+                "Bring out golden flecks with warm browns and golds.",
+                "Purple shades can emphasize green tones in hazel eyes.",
+                "Experiment with both warm and cool tones to see what works best.",
+                "Bronze and copper eyeshadows enhance the complexity of hazel eyes.",
+            ),
+            'fr' => array(
+                "Faites ressortir les paillettes dorées avec des bruns et des ors chauds.",
+                "Les nuances violettes peuvent accentuer les tons verts des yeux noisette.",
+                "Expérimentez avec des tons chauds et froids pour voir ce qui fonctionne le mieux.",
+                "Les ombres à paupières bronze et cuivre rehaussent la complexité des yeux noisette.",
+            ),
+            'ar' => array(
+                "أبرز البقع الذهبية بالألوان البنية والذهبية الدافئة.",
+                "الألوان البنفسجية يمكن أن تؤكد على الألوان الخضراء في العيون العسلية.",
+                "جرب الألوان الدافئة والباردة لترى ما يناسبك أكثر.",
+                "ظلال العيون البرونزية والنحاسية تعزز تعقيد العيون العسلية.",
+            ),
+        ),
+        'Gray' => array(
+            'en' => array(
+                "Silver and charcoal eyeshadows complement gray eyes naturally.",
+                "Purple and plum shades can make gray eyes appear more blue.",
+                "Warm browns can bring out any golden flecks in gray eyes.",
+                "Black eyeliner creates striking definition with gray eyes.",
+            ),
+            'fr' => array(
+                "Les ombres à paupières argentées et anthracite complètent naturellement les yeux gris.",
+                "Les nuances violettes et prune peuvent faire paraître les yeux gris plus bleus.",
+                "Les bruns chauds peuvent faire ressortir les paillettes dorées des yeux gris.",
+                "L'eye-liner noir crée une définition frappante avec les yeux gris.",
+            ),
+            'ar' => array(
+                "ظلال العيون الفضية والرمادية الداكنة تكمل العيون الرمادية بشكل طبيعي.",
+                "الألوان البنفسجية والخوخية يمكن أن تجعل العيون الرمادية تبدو أكثر زرقة.",
+                "الألوان البنية الدافئة يمكن أن تبرز أي بقع ذهبية في العيون الرمادية.",
+                "كحل العيون الأسود يخلق تعريف مذهل مع العيون الرمادية.",
+            ),
+        ),
+    );
+
     private static $acne_severity_tips = array(
         0 => array(
             'en' => array(
@@ -176,7 +280,7 @@ class Tips_Generator {
     public static function generate_tips($analysis_data, $language = 'en') {
         $tips = array();
         
-        // Add skin type tips
+        // 1. Add skin type tips
         if (!empty($analysis_data['skin_type'])) {
             $skin_type = $analysis_data['skin_type'];
             if (isset(self::$skin_type_tips[$skin_type][$language])) {
@@ -184,7 +288,23 @@ class Tips_Generator {
             }
         }
         
-        // Add acne severity tips
+        // 2. Add eye color tips (New logic synchronized with tips.js)
+        if (!empty($analysis_data['left_eye_color'])) {
+            $left_eye = $analysis_data['left_eye_color'];
+            if (isset(self::$eye_color_tips[$left_eye][$language])) {
+                $tips = array_merge($tips, array_slice(self::$eye_color_tips[$left_eye][$language], 0, 1));
+            }
+        }
+        
+        if (!empty($analysis_data['right_eye_color'])) {
+            $right_eye = $analysis_data['right_eye_color'];
+            // Only add if different from left eye color to avoid redundant tips
+            if ($right_eye !== ($analysis_data['left_eye_color'] ?? '') && isset(self::$eye_color_tips[$right_eye][$language])) {
+                $tips = array_merge($tips, array_slice(self::$eye_color_tips[$right_eye][$language], 0, 1));
+            }
+        }
+        
+        // 3. Add acne severity tips
         if (isset($analysis_data['acne_pred'])) {
             $acne_level = intval($analysis_data['acne_pred']);
             if (isset(self::$acne_severity_tips[$acne_level][$language])) {

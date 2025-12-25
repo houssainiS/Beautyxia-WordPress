@@ -80,6 +80,105 @@ const SKIN_TYPE_TIPS = {
   },
 }
 
+const EYE_COLOR_TIPS = {
+  en: {
+    Brown: [
+      "Enhance brown eyes with warm eyeshadow tones like gold, bronze, and copper.",
+      "Purple and plum shades create beautiful contrast with brown eyes.",
+      "Try navy blue eyeliner instead of black for a softer look.",
+      "Green eyeshadows can make brown eyes appear more vibrant.",
+    ],
+    Blue: [
+      "Warm tones like peach, coral, and bronze complement blue eyes beautifully.",
+      "Orange and copper eyeshadows make blue eyes pop.",
+      "Brown eyeliner can be more flattering than black for everyday wear.",
+      "Avoid blue eyeshadows that match your eye color exactly.",
+    ],
+    Green: [
+      "Purple and plum shades are perfect for making green eyes stand out.",
+      "Red and pink tones create stunning contrast with green eyes.",
+      "Golden and bronze shades enhance the warmth in green eyes.",
+      "Brown eyeliner often looks more natural than black with green eyes.",
+    ],
+    Hazel: [
+      "Bring out golden flecks with warm browns and golds.",
+      "Purple shades can emphasize green tones in hazel eyes.",
+      "Experiment with both warm and cool tones to see what works best.",
+      "Bronze and copper eyeshadows enhance the complexity of hazel eyes.",
+    ],
+    Gray: [
+      "Silver and charcoal eyeshadows complement gray eyes naturally.",
+      "Purple and plum shades can make gray eyes appear more blue.",
+      "Warm browns can bring out any golden flecks in gray eyes.",
+      "Black eyeliner creates striking definition with gray eyes.",
+    ],
+  },
+  fr: {
+    Brown: [
+      "Rehaussez les yeux bruns avec des tons d'ombre à paupières chauds comme l'or, le bronze et le cuivre.",
+      "Les nuances violettes et prune créent un beau contraste avec les yeux bruns.",
+      "Essayez l'eye-liner bleu marine au lieu du noir pour un look plus doux.",
+      "Les ombres à paupières vertes peuvent faire paraître les yeux bruns plus vibrants.",
+    ],
+    Blue: [
+      "Les tons chauds comme la pêche, le corail et le bronze complètent magnifiquement les yeux bleus.",
+      "Les ombres à paupières orange et cuivre font ressortir les yeux bleus.",
+      "L'eye-liner brun peut être plus flatteur que le noir pour un usage quotidien.",
+      "Évitez les ombres à paupières bleues qui correspondent exactement à votre couleur d'yeux.",
+    ],
+    Green: [
+      "Les nuances violettes et prune sont parfaites pour faire ressortir les yeux verts.",
+      "Les tons rouges et roses créent un contraste saisissant avec les yeux verts.",
+      "Les nuances dorées et bronze rehaussent la chaleur des yeux verts.",
+      "L'eye-liner brun paraît souvent plus naturel que le noir avec les yeux verts.",
+    ],
+    Hazel: [
+      "Faites ressortir les paillettes dorées avec des bruns et des ors chauds.",
+      "Les nuances violettes peuvent accentuer les tons verts des yeux noisette.",
+      "Expérimentez avec des tons chauds et froids pour voir ce qui fonctionne le mieux.",
+      "Les ombres à paupières bronze et cuivre rehaussent la complexité des yeux noisette.",
+    ],
+    Gray: [
+      "Les ombres à paupières argentées et anthracite complètent naturellement les yeux gris.",
+      "Les nuances violettes et prune peuvent faire paraître les yeux gris plus bleus.",
+      "Les bruns chauds peuvent faire ressortir les paillettes dorées des yeux gris.",
+      "L'eye-liner noir crée une définition frappante avec les yeux gris.",
+    ],
+  },
+  ar: {
+    Brown: [
+      "عزز العيون البنية بألوان ظلال العيون الدافئة مثل الذهبي والبرونزي والنحاسي.",
+      "الألوان البنفسجية والخوخية تخلق تباين جميل مع العيون البنية.",
+      "جرب كحل العيون الأزرق الداكن بدلاً من الأسود للحصول على مظهر أنعم.",
+      "ظلال العيون الخضراء يمكن أن تجعل العيون البنية تبدو أكثر حيوية.",
+    ],
+    Blue: [
+      "الألوان الدافئة مثل الخوخي والمرجاني والبرونزي تكمل العيون الزرقاء بشكل جميل.",
+      "ظلال العيون البرتقالية والنحاسية تجعل العيون الزرقاء تبرز.",
+      "كحل العيون البني يمكن أن يكون أكثر إطراءً من الأسود للاستخدام اليومي.",
+      "تجنب ظلال العيون الزرقاء التي تطابق لون عينيك تماماً.",
+    ],
+    Green: [
+      "الألوان البنفسجية والخوخية مثالية لإبراز العيون الخضراء.",
+      "الألوان الحمراء والوردية تخلق تباين مذهل مع العيون الخضراء.",
+      "الألوان الذهبية والبرونزية تعزز الدفء في العيون الخضراء.",
+      "كحل العيون البني غالباً ما يبدو أكثر طبيعية من الأسود مع العيون الخضراء.",
+    ],
+    Hazel: [
+      "أبرز البقع الذهبية بالألوان البنية والذهبية الدافئة.",
+      "الألوان البنفسجية يمكن أن تؤكد على الألوان الخضراء في العيون العسلية.",
+      "جرب الألوان الدافئة والباردة لترى ما يناسبك أكثر.",
+      "ظلال العيون البرونزية والنحاسية تعزز تعقيد العيون العسلية.",
+    ],
+    Gray: [
+      "ظلال العيون الفضية والرمادية الداكنة تكمل العيون الرمادية بشكل طبيعي.",
+      "الألوان البنفسجية والخوخية يمكن أن تجعل العيون الرمادية تبدو أكثر زرقة.",
+      "الألوان البنية الدافئة يمكن أن تبرز أي بقع ذهبية في العيون الرمادية.",
+      "كحل العيون الأسود يخلق تعريف مذهل مع العيون الرمادية.",
+    ],
+  },
+}
+
 const ACNE_SEVERITY_TIPS = {
   en: {
     0: [
@@ -163,28 +262,7 @@ const ACNE_SEVERITY_TIPS = {
 
 function generateTips(analysisData) {
   const currentLanguage = localStorage.getItem("preferredLanguage") || "en"
-  const tips = []
-
-  // Add skin type tips
-  if (
-    analysisData.skin_type &&
-    SKIN_TYPE_TIPS[currentLanguage] &&
-    SKIN_TYPE_TIPS[currentLanguage][analysisData.skin_type]
-  ) {
-    tips.push(...SKIN_TYPE_TIPS[currentLanguage][analysisData.skin_type].slice(0, 2))
-  }
-
-  // Add acne severity tips
-  if (analysisData.acne_pred !== undefined) {
-    const acneLevel = Number.parseInt(analysisData.acne_pred) || 0
-    if (ACNE_SEVERITY_TIPS[currentLanguage] && ACNE_SEVERITY_TIPS[currentLanguage][acneLevel]) {
-      tips.push(...ACNE_SEVERITY_TIPS[currentLanguage][acneLevel].slice(0, 2))
-    }
-  }
-
-  // Remove duplicates and limit total tips
-  const uniqueTips = [...new Set(tips)]
-  return uniqueTips.slice(0, 8)
+  return regenerateTipsForLanguage(analysisData, currentLanguage)
 }
 
 function regenerateTipsForLanguage(analysisData, newLanguage) {
@@ -195,6 +273,23 @@ function regenerateTipsForLanguage(analysisData, newLanguage) {
     tips.push(...SKIN_TYPE_TIPS[newLanguage][analysisData.skin_type].slice(0, 2))
   }
 
+  // Add eye color tips
+  if (
+    analysisData.left_eye_color &&
+    EYE_COLOR_TIPS[newLanguage] &&
+    EYE_COLOR_TIPS[newLanguage][analysisData.left_eye_color]
+  ) {
+    tips.push(...EYE_COLOR_TIPS[newLanguage][analysisData.left_eye_color].slice(0, 1))
+  }
+  if (
+    analysisData.right_eye_color &&
+    EYE_COLOR_TIPS[newLanguage] &&
+    EYE_COLOR_TIPS[newLanguage][analysisData.right_eye_color] &&
+    analysisData.right_eye_color !== analysisData.left_eye_color
+  ) {
+    tips.push(...EYE_COLOR_TIPS[newLanguage][analysisData.right_eye_color].slice(0, 1))
+  }
+
   // Add acne severity tips
   if (analysisData.acne_pred !== undefined) {
     const acneLevel = Number.parseInt(analysisData.acne_pred) || 0
@@ -203,7 +298,10 @@ function regenerateTipsForLanguage(analysisData, newLanguage) {
     }
   }
 
-  // Remove duplicates and limit total tips
   const uniqueTips = [...new Set(tips)]
   return uniqueTips.slice(0, 8)
+}
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { generateTips, regenerateTipsForLanguage }
 }
