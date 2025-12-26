@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.documentElement.lang = language
     localStorage.setItem("preferredLanguage", language)
 
-    if (lastAnalysisData && typeof regenerateTipsForLanguage === "function") {
-      const newTips = regenerateTipsForLanguage(lastAnalysisData, language)
+    if (lastAnalysisData && typeof window.regenerateTipsForLanguage === "function") {
+      const newTips = window.regenerateTipsForLanguage(lastAnalysisData, language)
       if (typeof displayTips === "function") {
         displayTips(newTips)
       }
@@ -118,11 +118,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function startWebcam() {
+    // FIX: Check if mediaDevices exists to prevent the "undefined" error
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      alert("Camera access is not supported by this browser or connection. Please ensure you are using HTTPS.");
+      return;
+    }
+
     navigator.mediaDevices
-      .getUserMedia({ video: { facingMode: "user" } })
+      .getUserMedia({ 
+        video: { 
+          facingMode: "user",
+          width: { ideal: 1280 },
+          height: { ideal: 720 }
+        } 
+      })
       .then((stream) => {
         webcamStream = stream
         webcamVideo.srcObject = stream
+        webcamVideo.setAttribute("playsinline", true) 
+        webcamVideo.play()
+        
         webcamSection.style.display = "flex"
         webcamBtn.style.display = "none"
         captureBtn.style.display = "flex"
@@ -136,7 +151,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function capturePhoto() {
     const context = webcamCanvas.getContext("2d")
-    context.drawImage(webcamVideo, 0, 0, 256, 256)
+    
+    webcamCanvas.width = 256
+    webcamCanvas.height = 256
+    
+    const videoWidth = webcamVideo.videoWidth
+    const videoHeight = webcamVideo.videoHeight
+    const size = Math.min(videoWidth, videoHeight)
+    const xOffset = (videoWidth - size) / 2
+    const yOffset = (videoHeight - size) / 2
+
+    context.drawImage(webcamVideo, xOffset, yOffset, size, size, 0, 0, 256, 256)
+    
     webcamCanvas.toBlob((blob) => {
       uploadedFile = blob
       preview.src = URL.createObjectURL(blob)
@@ -144,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
       previewPlaceholder.style.display = "none"
       updateAnalyzeButton()
       hideWebcam()
-    })
+    }, "image/jpeg", 0.95)
   }
 
   function hideWebcam() {
@@ -159,26 +185,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function hideResults() {
-    document.getElementById("results-section").style.display = "none"
-    document.getElementById("analysis-images").style.display = "none"
-    document.getElementById("tips-section").style.display = "none"
-    document.getElementById("feedbackSection").style.display = "none"
+    const resultsSec = document.getElementById("results-section")
+    const imagesSec = document.getElementById("analysis-images")
+    const tipsSec = document.getElementById("tips-section")
+    const feedbackSec = document.getElementById("feedbackSection")
+
+    if(resultsSec) resultsSec.style.display = "none"
+    if(imagesSec) imagesSec.style.display = "none"
+    if(tipsSec) tipsSec.style.display = "none"
+    if(feedbackSec) feedbackSec.style.display = "none"
   }
 
   function displayResults(data) {
     lastAnalysisData = data
     console.log("[v0] Displaying results:", data)
 
-    // Show results section
     const resultsSection = document.getElementById("results-section")
     resultsSection.style.display = "block"
 
-    // Update face image
     if (data.cropped_face) {
       document.getElementById("analyzed-face").src = data.cropped_face
     }
 
-    // Update skin type
     if (data.skin_type) {
       document.getElementById("skin-type-value").textContent = data.skin_type
       const skinProbs = document.getElementById("skin-probabilities")
@@ -204,7 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Update eye colors
     if (data.left_eye_color) {
       document.getElementById("left-eye-color").textContent = data.left_eye_color
     }
@@ -212,99 +239,77 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("right-eye-color").textContent = data.right_eye_color
     }
 
-    // Update acne analysis
-    if (data.acne_pred) {
+    if (data.acne_pred !== undefined) {
       document.getElementById("acne-level").textContent = data.acne_pred
       const confidence = (data.acne_confidence * 100).toFixed(1)
       document.getElementById("acne-confidence").textContent = `${confidence}%`
       document.getElementById("acne-confidence-fill").style.width = `${confidence}%`
     }
 
-    if (data.yolo_boxes && data.yolo_boxes.length > 0) {
-      const detectedIssues = document.getElementById("detected-issues")
+    const detectedIssues = document.getElementById("detected-issues")
+    if (detectedIssues) {
       detectedIssues.innerHTML = ""
-
-      // Group issues by class name and calculate average confidence
       const issueGroups = {}
-      data.yolo_boxes.forEach((box) => {
-        let issueClass = "Detected Issue"
-        if (box.class !== undefined && box.class !== null) {
-          issueClass = String(box.class)
-        } else if (box.name !== undefined && box.name !== null) {
-          issueClass = String(box.name)
-        } else if (box.label !== undefined && box.label !== null) {
-          issueClass = String(box.label)
-        }
 
-        if (!issueGroups[issueClass]) {
-          issueGroups[issueClass] = {
-            count: 0,
-            confidences: [],
-            totalConfidence: 0,
+      if (data.yolo_boxes && data.yolo_boxes.length > 0) {
+        data.yolo_boxes.forEach((box) => {
+          let issueClass = box.label || box.name || String(box.class) || "Detected Issue"
+          if (!issueGroups[issueClass]) {
+            issueGroups[issueClass] = { count: 0, totalConfidence: 0 }
           }
-        }
-        issueGroups[issueClass].count += 1
-        const confidence = box.confidence !== undefined ? box.confidence * 100 : 0
-        issueGroups[issueClass].confidences.push(confidence)
-        issueGroups[issueClass].totalConfidence += confidence
-      })
+          issueGroups[issueClass].count += 1
+          issueGroups[issueClass].totalConfidence += (box.confidence || 0) * 100
+        })
+      }
 
       if (data.segmentation_results && data.segmentation_results.length > 0) {
         data.segmentation_results.forEach((seg) => {
           let issueClass = seg.label || "Detected Issue"
           issueClass = String(issueClass).toLowerCase()
-
           if (!issueGroups[issueClass]) {
-            issueGroups[issueClass] = {
-              count: 0,
-              confidences: [],
-              totalConfidence: 0,
-            }
+            issueGroups[issueClass] = { count: 0, totalConfidence: 0 }
           }
           issueGroups[issueClass].count += 1
-          const confidence = seg.confidence !== undefined ? seg.confidence * 100 : 0
-          issueGroups[issueClass].confidences.push(confidence)
-          issueGroups[issueClass].totalConfidence += confidence
+          issueGroups[issueClass].totalConfidence += (seg.confidence || 0) * 100
         })
       }
 
-      // Display aggregated issues
-      Object.entries(issueGroups).forEach(([issueClass, data]) => {
-        const avgConfidence = (data.totalConfidence / data.count).toFixed(1)
-        const areaText = data.count > 1 ? "areas" : "area"
-        const formattedClass = issueClass.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())
+      if (Object.keys(issueGroups).length > 0) {
+        Object.entries(issueGroups).forEach(([issueClass, stats]) => {
+          const avgConfidence = (stats.totalConfidence / stats.count).toFixed(1)
+          const areaText = stats.count > 1 ? "areas" : "area"
+          const formattedClass = issueClass.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())
 
-        const issueHTML = `
-          <div class="issue-item">
-            <div class="issue-info">
-              <div class="issue-name">${formattedClass}</div>
-              <div class="issue-count">${data.count} ${areaText}</div>
-            </div>
-            <div class="issue-confidence">
-              <div class="confidence-bar">
-                <div class="confidence-fill" style="width: ${avgConfidence}%"></div>
+          const issueHTML = `
+            <div class="issue-item">
+              <div class="issue-info">
+                <div class="issue-name">${formattedClass}</div>
+                <div class="issue-count">${stats.count} ${areaText}</div>
               </div>
-              <span class="confidence-text">${avgConfidence}%</span>
+              <div class="issue-confidence">
+                <div class="confidence-bar">
+                  <div class="confidence-fill" style="width: ${avgConfidence}%"></div>
+                </div>
+                <span class="confidence-text">${avgConfidence}%</span>
+              </div>
             </div>
+          `
+          detectedIssues.innerHTML += issueHTML
+        })
+      } else {
+        detectedIssues.innerHTML = `
+          <div class="no-issues-message">
+            <div class="no-issues-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 12l2 2 4-4"/>
+              </svg>
+            </div>
+            <span class="no-issues-text">${translations[currentLanguage].no_issues_detected || "No significant issues detected"}</span>
           </div>
         `
-        detectedIssues.innerHTML += issueHTML
-      })
-    } else {
-      const detectedIssues = document.getElementById("detected-issues")
-      detectedIssues.innerHTML = `
-        <div class="no-issues-message">
-          <div class="no-issues-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9 12l2 2 4-4"/>
-            </svg>
-          </div>
-          <span class="no-issues-text">${translations[currentLanguage].no_issues_detected || "No significant issues detected"}</span>
-        </div>
-      `
+      }
     }
 
-    // Show analysis images
     if (data.yolo_annotated || data.segmentation_overlay) {
       const analysisImages = document.getElementById("analysis-images")
       analysisImages.style.display = "block"
@@ -313,29 +318,22 @@ document.addEventListener("DOMContentLoaded", () => {
         const yoloImg = document.getElementById("yolo-annotated-image")
         yoloImg.src = data.yolo_annotated
         yoloImg.style.display = "block"
-        yoloImg.onerror = () => console.error("Failed to load YOLO image")
       }
 
       if (data.segmentation_overlay) {
         const segImg = document.getElementById("segmentation-overlay-image")
         segImg.src = data.segmentation_overlay
         segImg.style.display = "block"
-        segImg.style.visibility = "visible"
-        segImg.style.opacity = "1"
-        segImg.onerror = () => console.error("Failed to load segmentation image")
       }
     }
 
-    // Generate and display tips
     if (typeof window.generateTips === "function") {
       const tips = window.generateTips(data)
       displayTips(tips)
     }
 
-    // Show feedback section
     document.getElementById("feedbackSection").style.display = "block"
 
-    // Scroll to results
     setTimeout(() => {
       resultsSection.scrollIntoView({ behavior: "smooth" })
     }, 300)
@@ -343,6 +341,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function displayTips(tips) {
     const tipsContent = document.getElementById("tips-content")
+    if(!tipsContent) return
     tipsContent.innerHTML = ""
 
     if (tips && tips.length > 0) {
@@ -365,37 +364,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-
-
   function initializeFeedbackHandlers() {
     const likeBtn = document.getElementById("likeBtn")
     const dislikeBtn = document.getElementById("dislikeBtn")
     const feedbackMessage = document.getElementById("feedbackMessage")
 
-    if (likeBtn) {
-      likeBtn.addEventListener("click", () => {
+    const handleFeedback = () => {
         feedbackMessage.textContent = translations[currentLanguage].feedback_thank_you || "Thank you for your feedback!"
         feedbackMessage.style.display = "block"
-        likeBtn.disabled = true
-        dislikeBtn.disabled = true
-      })
+        if(likeBtn) likeBtn.disabled = true
+        if(dislikeBtn) dislikeBtn.disabled = true
     }
 
-    if (dislikeBtn) {
-      dislikeBtn.addEventListener("click", () => {
-        feedbackMessage.textContent = translations[currentLanguage].feedback_thank_you || "Thank you for your feedback!"
-        feedbackMessage.style.display = "block"
-        likeBtn.disabled = true
-        dislikeBtn.disabled = true
-      })
-    }
+    if (likeBtn) likeBtn.addEventListener("click", handleFeedback)
+    if (dislikeBtn) dislikeBtn.addEventListener("click", handleFeedback)
   }
 
   if (analyzeBtn) {
     analyzeBtn.addEventListener("click", () => {
-      if (!uploadedFile || !consentCheckbox.checked) {
-        return
-      }
+      if (!uploadedFile || !consentCheckbox.checked) return
 
       const formData = new FormData()
       formData.append("photo", uploadedFile)
@@ -410,34 +397,27 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "POST",
         body: formData,
       })
-        .then((response) => {
-          const contentType = response.headers.get("content-type")
-          if (!contentType || !contentType.includes("application/json")) {
-            return response.text().then((text) => {
-              throw new Error(`Server returned ${contentType || "unknown content type"} instead of JSON`)
-            })
-          }
-          return response.json()
-        })
-        .then((data) => {
-          loadingSection.style.display = "none"
-          updateAnalyzeButton()
-          analyzeBtn.querySelector(".button-text").textContent =
-            translations[currentLanguage].analyze_face || "Analyze Face"
+      .then((response) => response.json())
+      .then((data) => {
+        loadingSection.style.display = "none"
+        updateAnalyzeButton()
+        analyzeBtn.querySelector(".button-text").textContent =
+          translations[currentLanguage].analyze_face || "Analyze Face"
 
-          if (data.error) {
-            console.error("API Error:", data.error)
-          } else {
-            displayResults(data)
-          }
-        })
-        .catch((err) => {
-          loadingSection.style.display = "none"
-          updateAnalyzeButton()
-          analyzeBtn.querySelector(".button-text").textContent =
-            translations[currentLanguage].analyze_face || "Analyze Face"
-          console.error("Analysis failed:", err)
-        })
+        if (data.error) {
+          console.error("API Error:", data.error)
+          alert("Error: " + data.error)
+        } else {
+          displayResults(data)
+        }
+      })
+      .catch((err) => {
+        loadingSection.style.display = "none"
+        updateAnalyzeButton()
+        analyzeBtn.querySelector(".button-text").textContent =
+          translations[currentLanguage].analyze_face || "Analyze Face"
+        console.error("Analysis failed:", err)
+      })
     })
   }
 
