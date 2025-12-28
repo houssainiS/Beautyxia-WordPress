@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const webcamSection = document.getElementById("webcam-section")
   const webcamVideo = document.getElementById("webcam-video")
   const webcamCanvas = document.getElementById("webcam-canvas")
+  const productRecommendations = document.getElementById('product-recommendations')
+  const activeFiltersDiv = document.getElementById('active-filters')
+  const productItems = document.querySelectorAll('.product-item')
+  const noProductsDiv = document.getElementById('no-products')
 
   const translations = window.translations || {}
 
@@ -118,7 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function startWebcam() {
-    // FIX: Check if mediaDevices exists to prevent the "undefined" error
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       alert("Camera access is not supported by this browser or connection. Please ensure you are using HTTPS.");
       return;
@@ -185,15 +188,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function hideResults() {
-    const resultsSec = document.getElementById("results-section")
-    const imagesSec = document.getElementById("analysis-images")
-    const tipsSec = document.getElementById("tips-section")
-    const feedbackSec = document.getElementById("feedbackSection")
-
-    if(resultsSec) resultsSec.style.display = "none"
-    if(imagesSec) imagesSec.style.display = "none"
-    if(tipsSec) tipsSec.style.display = "none"
-    if(feedbackSec) feedbackSec.style.display = "none"
+    const sections = [
+      "results-section", 
+      "analysis-images", 
+      "tips-section", 
+      "feedbackSection",
+      "product-recommendations"
+    ]
+    
+    sections.forEach(id => {
+      const el = document.getElementById(id)
+      if(el) el.style.display = "none"
+    })
   }
 
   function displayResults(data) {
@@ -332,6 +338,9 @@ document.addEventListener("DOMContentLoaded", () => {
       displayTips(tips)
     }
 
+    // Trigger Product Recommendations (WooCommerce Logic)
+    showProductRecommendations(data)
+
     document.getElementById("feedbackSection").style.display = "block"
 
     setTimeout(() => {
@@ -362,6 +371,84 @@ document.addEventListener("DOMContentLoaded", () => {
         tipsContent.innerHTML += tipHTML
       })
     }
+  }
+
+  // --- NEW: WooCommerce Product Recommendations Logic ---
+  function showProductRecommendations(analysisData) {
+    if(!activeFiltersDiv || !productRecommendations) return;
+
+    const filters = [];
+    
+    // 1. Add Skin Type
+    if (analysisData.skin_type) {
+      filters.push(analysisData.skin_type.toLowerCase());
+    }
+    
+    // 2. Add YOLO detections
+    if (analysisData.yolo_boxes && analysisData.yolo_boxes.length > 0) {
+      const detectedIssues = [...new Set(analysisData.yolo_boxes.map(box => 
+        (box.label || box.class || '').toLowerCase()
+      ))];
+      filters.push(...detectedIssues);
+    }
+    
+    // 3. Add Segmentation results
+    if (analysisData.segmentation_results) {
+      let segmentationIssues = [];
+      if (Array.isArray(analysisData.segmentation_results)) {
+        segmentationIssues = analysisData.segmentation_results
+          .map(result => {
+            if (typeof result === 'string') {
+              return result;
+            } else if (result && typeof result === 'object') {
+              return (result.class || result.label || result.name || '').toString();
+            }
+            return '';
+          })
+          .filter(issue => issue.length > 0)
+          .map(issue => issue.toLowerCase());
+      }
+      filters.push(...segmentationIssues);
+    }
+    
+    // 4. Add Acne
+    if (analysisData.acne_pred && parseInt(analysisData.acne_pred) > 0) {
+      filters.push('acne');
+    }
+    
+    const uniqueFilters = [...new Set(filters)];
+    
+    // Display active filters
+    activeFiltersDiv.innerHTML = uniqueFilters.map(filter => 
+      `<span class="filter-tag">${filter}</span>`
+    ).join('');
+
+    let visibleCount = 0;
+    
+    // Filter product items
+    productItems.forEach(item => {
+      const productTags = (item.dataset.tags || '').toLowerCase();
+      const productTitle = (item.dataset.title || '').toLowerCase();
+      
+      const isRelevant = uniqueFilters.some(filter => 
+        productTags.includes(filter) || productTitle.includes(filter)
+      );
+      
+      if (isRelevant) {
+        item.style.display = 'block';
+        visibleCount++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    if (visibleCount === 0) {
+      noProductsDiv.style.display = 'block';
+    } else {
+      noProductsDiv.style.display = 'none';
+    }
+    
+    productRecommendations.style.display = 'block';
   }
 
   function initializeFeedbackHandlers() {

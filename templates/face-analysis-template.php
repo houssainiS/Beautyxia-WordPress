@@ -1,6 +1,6 @@
 <?php
 /**
- * Face Analysis Template
+ * Face Analysis Template with WooCommerce Integration
  */
 
 if (!defined('ABSPATH')) {
@@ -12,7 +12,6 @@ if (!defined('ABSPATH')) {
     <div class="my-app-container" dir="ltr">
         <div class="face-analysis-container">
             <div class="face-analysis-card">
-                <!-- Header -->
                 <div class="face-analysis-header">
                     <div class="header-content">
                         <div class="title-section">
@@ -27,9 +26,7 @@ if (!defined('ABSPATH')) {
                     </div>
                 </div>
 
-                <!-- Body -->
                 <div class="face-analysis-body">
-                    <!-- Image Preview -->
                     <div class="face-analysis-preview">
                         <div class="preview-placeholder" id="preview-placeholder">
                             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="face-icon">
@@ -43,13 +40,11 @@ if (!defined('ABSPATH')) {
                         <img id="preview-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3C/svg%3E" alt="Uploaded Image Preview" width="256" height="256" class="preview-image" style="display: none;">
                     </div>
 
-                    <!-- Webcam Section -->
                     <div id="webcam-section" class="webcam-section" style="display:none;">
                         <video id="webcam-video" width="256" height="256" autoplay playsinline></video>
                         <canvas id="webcam-canvas" width="256" height="256" style="display:none;"></canvas>
                     </div>
 
-                    <!-- Upload Section -->
                     <div class="upload-section">
                         <input id="picture" type="file" class="hidden-file" accept="image/png, image/jpeg">
                         <button type="button" class="upload-button" onclick="document.getElementById('picture').click()">
@@ -84,15 +79,14 @@ if (!defined('ABSPATH')) {
                             <span data-translate="stop_camera">Stop Camera</span>
                         </button>
 
-                        <!-- GDPR Consent -->
                         <div class="gdpr-consent-section">
                             <div class="consent-checkbox">
                                 <input type="checkbox" id="consent" required>
-                                <label for="consent" data-translate="consent_text">I agree to the processing of my photo for temporary analysis to receive beauty tips. I understand that my photo will not be stored.</label>
+                                <label for="consent" data-translate="consent_text">I agree to the processing of my photo for temporary analysis. I understand that my photo will not be stored.</label>
                             </div>
                             <p class="privacy-policy-link">
                                 <span data-translate="privacy_policy_text">Read our</span>
-                                <a href="https://beautyai.duckdns.org/privacy-policy/" target="_blank" data-translate="privacy_policy_link">Privacy Policy</a>
+                                <a href="/privacy-policy/" target="_blank" data-translate="privacy_policy_link">Privacy Policy</a>
                                 <span data-translate="privacy_policy_details">for more details.</span>
                             </p>
                         </div>
@@ -107,7 +101,6 @@ if (!defined('ABSPATH')) {
                         <p class="upload-note" data-translate="upload_note">PNG, JPG, or JPEG up to 10MB</p>
                     </div>
 
-                    <!-- Loading Section -->
                     <div id="loading-section" class="loading-section" style="display:none;">
                         <div class="loading-content">
                             <div class="loading-spinner">
@@ -122,7 +115,6 @@ if (!defined('ABSPATH')) {
                         </div>
                     </div>
 
-                    <!-- Results Section -->
                     <div id="results-section" class="results-section" style="display:none;">
                         <div class="results-header">
                             <div class="results-icon">
@@ -151,7 +143,6 @@ if (!defined('ABSPATH')) {
                                 </div>
                             </div>
 
-                            <!-- Result Cards -->
                             <div class="result-cards">
                                 <div class="result-card" id="skin-type-card">
                                     <div class="card-icon">
@@ -228,7 +219,6 @@ if (!defined('ABSPATH')) {
                         </div>
                     </div>
 
-                    <!-- Analysis Images Section -->
                     <div id="analysis-images" class="analysis-images-section" style="display:none;">
                         <div class="images-header">
                             <h3 data-translate="detailed_analysis">Detailed Analysis</h3>
@@ -274,7 +264,6 @@ if (!defined('ABSPATH')) {
                         </div>
                     </div>
 
-                    <!-- Feedback Section -->
                     <div class="feedback-section" id="feedbackSection" style="display:none;">
                         <div class="feedback-header">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -299,7 +288,6 @@ if (!defined('ABSPATH')) {
                         <div class="feedback-message" id="feedbackMessage" style="display:none;"></div>
                     </div>
 
-                    <!-- Tips Section -->
                     <div id="tips-section" class="tips-section" style="display:none;">
                         <div class="tips-header">
                             <div class="tips-icon">
@@ -321,6 +309,90 @@ if (!defined('ABSPATH')) {
                             </div>
                         </div>
                         <div id="tips-content" class="tips-content"></div>
+                    </div>
+
+                    <div id="product-recommendations" class="product-recommendations-section" style="display:none;">
+                        <div class="recommendations-header">
+                            <div class="recommendations-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="8" cy="21" r="1"/>
+                                    <circle cx="19" cy="21" r="1"/>
+                                    <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57L20.42 9H5.12"/>
+                                </svg>
+                            </div>
+                            <h3 data-translate="recommended_products">Recommended Products</h3>
+                            <p data-translate="curated_products">Curated skincare products based on your analysis</p>
+                        </div>
+                        
+                        <div class="recommendations-filters">
+                            <span class="filter-label" data-translate="filtering_by">Filtering by:</span>
+                            <div id="active-filters" class="active-filters"></div>
+                        </div>
+                        
+                        <div id="recommended-products" class="product-grid">
+                            <?php
+                            // Check if WooCommerce is active and pull products
+                            if (class_exists('WooCommerce')) {
+                                // IMPORTANT: Fetch products. Adjust 'limit' if you have many products.
+                                $args = array(
+                                    'limit' => 200, 
+                                    'status' => 'publish',
+                                );
+                                $products = wc_get_products($args);
+
+                                foreach ($products as $product) {
+                                    // Collect all tags for this product into a string
+                                    $tags = array();
+                                    foreach ($product->get_tag_ids() as $tag_id) {
+                                        $term = get_term($tag_id);
+                                        if ($term) {
+                                            $tags[] = strtolower($term->name);
+                                        }
+                                    }
+                                    $tags_str = implode(',', $tags);
+                                    $title_lower = strtolower($product->get_name());
+                                    
+                                    // Get image URL
+                                    $image_id = $product->get_image_id();
+                                    $image_url = $image_id ? wp_get_attachment_image_url($image_id, 'woocommerce_thumbnail') : wc_placeholder_img_src();
+                                    ?>
+                                    <div class="product-item" 
+                                         data-tags="<?php echo esc_attr($tags_str); ?>"
+                                         data-title="<?php echo esc_attr($title_lower); ?>"
+                                         style="display: none;">
+
+                                        <div class="product-image">
+                                            <img src="<?php echo esc_url($image_url); ?>" 
+                                                 alt="<?php echo esc_attr($product->get_name()); ?>" 
+                                                 width="200" 
+                                                 height="200">
+                                        </div>
+
+                                        <div class="product-info">
+                                            <h4 class="product-title"><?php echo esc_html($product->get_name()); ?></h4>
+                                            <p class="product-price"><?php echo $product->get_price_html(); ?></p>
+
+                                            <a href="<?php echo esc_url($product->get_permalink()); ?>" class="product-link" data-translate="view_product">
+                                                View Product
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </div>
+
+                        <div id="no-products" class="no-products" style="display: none;">
+                            <div class="no-products-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M8 12h8"/>
+                                </svg>
+                            </div>
+                            <h4 data-translate="no_products_found">No Products Found</h4>
+                            <p data-translate="no_products_message">We couldn't find products matching your skin analysis. Check back later for new recommendations.</p>
+                        </div>
                     </div>
                 </div>
             </div>
