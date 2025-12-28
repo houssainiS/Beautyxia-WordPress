@@ -6,11 +6,8 @@
 }
 
 .face-analysis-plugin * {
-
   box-sizing: border-box;
 }
-
-
 
 /* Language selector styling */
 .face-analysis-plugin .header-content {
@@ -82,6 +79,11 @@
 }
 
 .face-analysis-plugin .my-app-container[dir="rtl"] .eye-colors {
+  flex-direction: row-reverse;
+}
+
+.face-analysis-plugin .my-app-container[dir="rtl"] .recommendations-filters,
+.face-analysis-plugin .my-app-container[dir="rtl"] .active-filters {
   flex-direction: row-reverse;
 }
 
@@ -216,9 +218,11 @@
 .face-analysis-plugin .face-icon {
   color: #6d7175;
   margin-bottom: 12px;
-  width: 64px;
-  height: 64px;
-  stroke: #6d7175;
+  width: 64px !important;
+  height: 64px !important;
+  stroke: #6d7175 !important;
+  fill: none !important;
+  stroke-width: 1.5 !important;
 }
 
 .face-analysis-plugin .preview-placeholder p {
@@ -324,8 +328,8 @@
 
 .face-analysis-plugin .icon-upload {
   margin-right: 8px;
-  width: 20px;
-  height: 20px;
+  width: 20px !important;
+  height: 20px !important;
   flex-shrink: 0;
 }
 
@@ -335,129 +339,6 @@
   text-align: center;
   margin: 0;
   line-height: 1.4;
-}
-
-/* Buttons and icon sizing */
-.face-analysis-plugin .upload-button svg,
-.face-analysis-plugin .webcam-button svg,
-.face-analysis-plugin .capture-button svg,
-.face-analysis-plugin .stop-camera-button svg,
-.face-analysis-plugin .analyze-button svg {
-  width: 20px !important;
-  height: 20px !important;
-  flex-shrink: 0;
-  color: inherit;
-  stroke: currentColor;
-}
-
-.face-analysis-plugin .btn-feedback-positive svg,
-.face-analysis-plugin .btn-feedback-negative svg {
-  width: 20px !important;
-  height: 20px !important;
-  flex-shrink: 0;
-  stroke: currentColor;
-}
-
-.face-analysis-plugin .icon-upload {
-  margin-right: 8px;
-  width: 20px !important;
-  height: 20px !important;
-  flex-shrink: 0;
-}
-
-/* Fixed tip icon sizing - was overriding to 12px */
-.face-analysis-plugin .tip-icon {
-  width: 24px;
-  height: 24px;
-  background-color: #f59e0b;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.face-analysis-plugin .tip-icon svg {
-  width: 16px !important;
-  height: 16px !important;
-  color: #ffffff;
-  stroke: #ffffff;
-}
-
-/* Card icons */
-.face-analysis-plugin .card-icon {
-  width: 40px;
-  height: 40px;
-  background-color: #f0f9ff;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-}
-
-.face-analysis-plugin .card-icon svg {
-  color: #2563eb;
-  width: 20px !important;
-  height: 20px !important;
-  stroke: #2563eb;
-}
-
-/* Face icon in preview */
-.face-analysis-plugin .face-icon {
-  color: #6d7175;
-  margin-bottom: 12px;
-  width: 64px !important;
-  height: 64px !important;
-  stroke: #6d7175;
-}
-
-/* Badge icons */
-.face-analysis-plugin .face-badge svg {
-  color: #ffffff;
-  width: 12px !important;
-  height: 12px !important;
-  stroke: #ffffff;
-}
-
-/* Image icons */
-.face-analysis-plugin .image-icon svg {
-  color: #2563eb;
-  width: 16px !important;
-  height: 16px !important;
-  stroke: #2563eb;
-}
-
-/* Results icon */
-.face-analysis-plugin .results-icon svg {
-  color: #2563eb;
-  width: 24px !important;
-  height: 24px !important;
-  stroke: #2563eb;
-}
-
-/* Tips header icon */
-.face-analysis-plugin .tips-icon svg {
-  color: #f59e0b;
-  width: 24px !important;
-  height: 24px !important;
-  stroke: #f59e0b;
-}
-
-/* No issues icon */
-.face-analysis-plugin .no-issues-icon svg {
-  color: #ffffff;
-  width: 16px !important;
-  height: 16px !important;
-  stroke: #ffffff;
-}
-
-/* Feedback header icon */
-.face-analysis-plugin .feedback-header svg {
-  width: 24px !important;
-  height: 24px !important;
-  stroke: currentColor;
 }
 
 /* Results section styling */
@@ -486,8 +367,11 @@
 
 .face-analysis-plugin .results-icon svg {
   color: #2563eb;
-  width: 24px;
-  height: 24px;
+  width: 24px !important;
+  height: 24px !important;
+  stroke: #2563eb !important;
+  fill: none !important;
+  stroke-width: 2 !important;
 }
 
 .face-analysis-plugin .results-header h2 {
@@ -541,8 +425,11 @@
 
 .face-analysis-plugin .face-badge svg {
   color: #ffffff;
-  width: 12px;
-  height: 12px;
+  width: 12px !important;
+  height: 12px !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+  stroke-width: 2 !important;
 }
 
 .face-analysis-plugin .face-info h3 {
@@ -592,8 +479,11 @@
 
 .face-analysis-plugin .result-card .card-icon svg {
   color: #2563eb;
-  width: 20px;
-  height: 20px;
+  width: 20px !important;
+  height: 20px !important;
+  stroke: #2563eb !important;
+  fill: none !important;
+  stroke-width: 2 !important;
 }
 
 .face-analysis-plugin .result-card h4 {
@@ -785,8 +675,11 @@
 
 .face-analysis-plugin .no-issues-icon svg {
   color: #ffffff;
-  width: 16px;
-  height: 16px;
+  width: 16px !important;
+  height: 16px !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+  stroke-width: 2 !important;
 }
 
 .face-analysis-plugin .no-issues-text {
@@ -859,8 +752,11 @@
 
 .face-analysis-plugin .image-icon svg {
   color: #2563eb;
-  width: 16px;
-  height: 16px;
+  width: 16px !important;
+  height: 16px !important;
+  stroke: #2563eb !important;
+  fill: none !important;
+  stroke-width: 2 !important;
 }
 
 .face-analysis-plugin .image-title h4 {
@@ -894,6 +790,102 @@
   min-width: 100px;
 }
 
+/* Feedback Section Styling */
+.face-analysis-plugin .feedback-section {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #e1e3e5;
+  border-radius: 12px;
+}
+
+.face-analysis-plugin .feedback-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.face-analysis-plugin .feedback-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #202223;
+  margin: 0;
+}
+
+.face-analysis-plugin .feedback-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.face-analysis-plugin .btn-feedback-positive,
+.face-analysis-plugin .btn-feedback-negative {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid #e1e3e5;
+  background-color: #ffffff;
+  color: #202223;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.face-analysis-plugin .btn-feedback-positive:hover:not(:disabled) {
+  background-color: #f0fdf4;
+  border-color: #16a34a;
+  color: #16a34a;
+}
+
+.face-analysis-plugin .btn-feedback-positive svg {
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0;
+  stroke: currentColor !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+}
+
+.face-analysis-plugin .btn-feedback-negative:hover:not(:disabled) {
+  background-color: #fef2f2;
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.face-analysis-plugin .btn-feedback-negative svg {
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0;
+  stroke: currentColor !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+}
+
+.face-analysis-plugin .btn-feedback-positive:disabled,
+.face-analysis-plugin .btn-feedback-negative:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.face-analysis-plugin .feedback-message {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  color: #15803d;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
 /* Tips section styling */
 .face-analysis-plugin .tips-section {
   margin-top: 40px;
@@ -925,8 +917,11 @@
 
 .face-analysis-plugin .tips-icon svg {
   color: #f59e0b;
-  width: 24px;
-  height: 24px;
+  width: 24px !important;
+  height: 24px !important;
+  stroke: #f59e0b !important;
+  fill: none !important;
+  stroke-width: 2 !important;
 }
 
 .face-analysis-plugin .tips-header h3 {
@@ -963,7 +958,7 @@
   margin-bottom: 0;
 }
 
-.face-analysis-plugin .tip-icon {
+.face-analysis-plugin .tip-item .tip-icon {
   width: 24px;
   height: 24px;
   background-color: #f59e0b;
@@ -975,11 +970,13 @@
   margin-top: 2px;
 }
 
-.face-analysis-plugin .tip-icon svg {
+.face-analysis-plugin .tip-item .tip-icon svg {
   color: #ffffff;
-  width: 16px;
-  height: 16px;
-  stroke: #ffffff;
+  width: 16px !important;
+  height: 16px !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+  stroke-width: 2 !important;
 }
 
 .face-analysis-plugin .tip-text {
@@ -1065,12 +1062,8 @@
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .face-analysis-plugin .loading-text h3 {
@@ -1138,123 +1131,242 @@
   text-decoration: none;
 }
 
-/* Feedback Section Styling */
-.face-analysis-plugin .feedback-section {
-  margin-top: 30px;
-  padding: 20px;
+/* --------------------------------------------------------------
+   NEW: Product Recommendations Section Styles 
+   (Ported from Shopify extension, scoped to .face-analysis-plugin)
+   --------------------------------------------------------------
+*/
+
+.face-analysis-plugin .product-recommendations-section {
+  margin-top: 40px;
+  padding: 30px 20px;
   background-color: #ffffff;
   border: 1px solid #e1e3e5;
   border-radius: 12px;
 }
 
-.face-analysis-plugin .feedback-header {
+.face-analysis-plugin .recommendations-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e1e3e5;
+}
+
+.face-analysis-plugin .recommendations-icon {
+  width: 48px;
+  height: 48px;
+  background-color: #f0f9ff;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: 16px;
 }
 
-.face-analysis-plugin .feedback-header h3 {
-  font-size: 16px;
+.face-analysis-plugin .recommendations-icon svg {
+  color: #2563eb;
+  width: 24px !important;
+  height: 24px !important;
+  stroke: #2563eb !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+}
+
+.face-analysis-plugin .recommendations-header h3 {
+  font-size: 20px;
   font-weight: 600;
   color: #202223;
+  margin: 0 0 4px 0;
+}
+
+.face-analysis-plugin .recommendations-header p {
+  font-size: 14px;
+  color: #6d7175;
   margin: 0;
 }
 
-.face-analysis-plugin .feedback-buttons {
+/* Recommendations filters */
+.face-analysis-plugin .recommendations-filters {
   display: flex;
+  align-items: center;
   gap: 12px;
-  justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
-.face-analysis-plugin .btn-feedback-positive,
-.face-analysis-plugin .btn-feedback-negative {
+.face-analysis-plugin .filter-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #202223;
+}
+
+.face-analysis-plugin .active-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.face-analysis-plugin .filter-tag {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 14px;
+  padding: 4px 8px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 12px;
   font-weight: 500;
-  border: 1px solid #e1e3e5;
+  text-transform: capitalize;
+}
+
+/* Product grid */
+.face-analysis-plugin .product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 640px) {
+  .face-analysis-plugin .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .face-analysis-plugin .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Product item styling */
+.face-analysis-plugin .product-item {
   background-color: #ffffff;
-  color: #202223;
-  cursor: pointer;
+  border: 1px solid #e1e3e5;
+  border-radius: 8px;
+  overflow: hidden;
   transition: all 0.2s ease;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  cursor: pointer;
+  animation: fadeInUp 0.3s ease forwards;
+  display: flex;
+  flex-direction: column;
 }
 
-.face-analysis-plugin .btn-feedback-positive:hover:not(:disabled) {
-  background-color: #f0fdf4;
-  border-color: #16a34a;
-  color: #16a34a;
+.face-analysis-plugin .product-item:hover {
+  border-color: #c9cccf;
+  box-shadow: 0 2px 4px rgba(22, 29, 37, 0.1);
 }
 
-.face-analysis-plugin .btn-feedback-positive svg {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
+.face-analysis-plugin .product-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: #f6f6f7;
 }
 
-.face-analysis-plugin .btn-feedback-negative:hover:not(:disabled) {
-  background-color: #fef2f2;
-  border-color: #dc2626;
-  color: #dc2626;
+.face-analysis-plugin .product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
 }
 
-.face-analysis-plugin .btn-feedback-negative svg {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
+.face-analysis-plugin .product-item:hover .product-image img {
+  transform: scale(1.05);
 }
 
-.face-analysis-plugin .btn-feedback-positive:disabled,
-.face-analysis-plugin .btn-feedback-negative:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
+.face-analysis-plugin .product-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
-.face-analysis-plugin .feedback-message {
-  margin-top: 16px;
-  padding: 12px 16px;
-  background-color: #f0fdf4;
-  border: 1px solid #bbf7d0;
+.face-analysis-plugin .product-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #202223;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 44px;
+}
+
+.face-analysis-plugin .product-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #202223;
+  margin: 0 0 12px 0;
+}
+
+.face-analysis-plugin .product-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 16px;
+  background-color: #202223;
+  color: #ffffff;
+  text-decoration: none;
   border-radius: 6px;
-  color: #15803d;
   font-size: 14px;
   font-weight: 500;
+  transition: all 0.2s ease;
+  margin-top: auto;
+}
+
+.face-analysis-plugin .product-link:hover {
+  background-color: #000000;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+/* No products styling */
+.face-analysis-plugin .no-products {
   text-align: center;
+  padding: 60px 20px;
+  color: #6d7175;
 }
 
-@media (max-width: 640px) {
-  .face-analysis-plugin .feedback-buttons {
-    flex-direction: column;
-  }
-
-  .face-analysis-plugin .btn-feedback-positive,
-  .face-analysis-plugin .btn-feedback-negative {
-    width: 100%;
-    justify-content: center;
-  }
+.face-analysis-plugin .no-products-icon {
+  margin: 0 auto 20px auto;
+  width: 64px;
+  height: 64px;
+  background-color: #f6f6f7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Focus states for accessibility */
-.face-analysis-plugin .upload-button:focus,
-.face-analysis-plugin .analyze-button:focus,
-.face-analysis-plugin .webcam-button:focus,
-.face-analysis-plugin .capture-button:focus,
-.face-analysis-plugin .stop-camera-button:focus,
-.face-analysis-plugin .lang-selector-btn:focus {
-  outline-offset: 2px;
+.face-analysis-plugin .no-products-icon svg {
+  color: #c9cccf;
+  width: 48px !important;
+  height: 48px !important;
+  stroke: #c9cccf !important;
+  fill: none !important;
+  stroke-width: 1.5 !important;
 }
 
-.face-analysis-plugin .hidden-file:focus + .upload-button {
-  outline: 2px solid #2563eb;
-  outline-offset: 2px;
+.face-analysis-plugin .no-products h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #202223;
+  margin: 0 0 8px 0;
 }
 
+.face-analysis-plugin .no-products p {
+  font-size: 14px;
+  margin: 0;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Animation */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -1266,15 +1378,7 @@
   }
 }
 
-/* fix SVG icons - add fill and ensure full icon visibility */
-.face-analysis-plugin svg {
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* ensure all button SVGs display properly */
+/* Ensure all buttons have correct SVG sizing and color */
 .face-analysis-plugin .upload-button svg,
 .face-analysis-plugin .webcam-button svg,
 .face-analysis-plugin .capture-button svg,
@@ -1289,94 +1393,19 @@
   stroke-width: 2 !important;
 }
 
-/* fix tip icon SVG to show sun properly */
-.face-analysis-plugin .tip-icon svg {
-  color: #ffffff;
-  width: 16px !important;
-  height: 16px !important;
-  stroke: #ffffff !important;
-  fill: none !important;
-  stroke-width: 2 !important;
+/* Accessibility focus styles */
+.face-analysis-plugin .upload-button:focus,
+.face-analysis-plugin .analyze-button:focus,
+.face-analysis-plugin .webcam-button:focus,
+.face-analysis-plugin .capture-button:focus,
+.face-analysis-plugin .stop-camera-button:focus,
+.face-analysis-plugin .lang-selector-btn:focus,
+.face-analysis-plugin .product-link:focus {
+  outline-offset: 2px;
+  outline: 2px solid #2563eb;
 }
 
-/* fix card icon SVG display */
-.face-analysis-plugin .card-icon svg {
-  color: #2563eb;
-  width: 20px !important;
-  height: 20px !important;
-  stroke: #2563eb !important;
-  fill: none !important;
-  stroke-width: 2 !important;
-}
-
-/* fix face icon in preview */
-.face-analysis-plugin .face-icon {
-  color: #6d7175;
-  margin-bottom: 12px;
-  width: 64px !important;
-  height: 64px !important;
-  stroke: #6d7175 !important;
-  fill: none !important;
-  stroke-width: 1.5 !important;
-}
-
-/* fix results icon */
-.face-analysis-plugin .results-icon svg {
-  color: #2563eb;
-  width: 24px !important;
-  height: 24px !important;
-  stroke: #2563eb !important;
-  fill: none !important;
-  stroke-width: 2 !important;
-}
-
-/* fix tips header icon */
-.face-analysis-plugin .tips-icon svg {
-  color: #f59e0b;
-  width: 24px !important;
-  height: 24px !important;
-  stroke: #f59e0b !important;
-  fill: none !important;
-  stroke-width: 2 !important;
-}
-
-/* fix image icon display */
-.face-analysis-plugin .image-icon svg {
-  color: #2563eb;
-  width: 16px !important;
-  height: 16px !important;
-  stroke: #2563eb !important;
-  fill: none !important;
-  stroke-width: 2 !important;
-}
-
-/* fix no issues icon */
-.face-analysis-plugin .no-issues-icon svg {
-  color: #ffffff;
-  width: 16px !important;
-  height: 16px !important;
-  stroke: #ffffff !important;
-  fill: none !important;
-  stroke-width: 2 !important;
-}
-
-/* fix feedback icons */
-.face-analysis-plugin .btn-feedback-positive svg,
-.face-analysis-plugin .btn-feedback-negative svg {
-  width: 20px !important;
-  height: 20px !important;
-  flex-shrink: 0;
-  stroke: currentColor !important;
-  fill: none !important;
-  stroke-width: 2 !important;
-}
-
-/* badge icon styling */
-.face-analysis-plugin .face-badge svg {
-  color: #ffffff;
-  width: 12px !important;
-  height: 12px !important;
-  stroke: #ffffff !important;
-  fill: none !important;
-  stroke-width: 2 !important;
+.face-analysis-plugin .hidden-file:focus + .upload-button {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
 }
