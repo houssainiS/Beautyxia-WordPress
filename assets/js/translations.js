@@ -10,8 +10,7 @@ window.translations = {
     use_camera: "Use Camera",
     capture_photo: "Capture Photo",
     stop_camera: "Stop Camera",
-    consent_text:
-      "I agree to the processing of my photo for temporary analysis to receive beauty tips. I understand that my photo will not be stored.",
+    consent_text: "I agree to the processing of my photo for temporary analysis to receive beauty tips. I understand that my photo will not be stored.",
     privacy_policy_text: "Read our",
     privacy_policy_link: "Privacy Policy",
     privacy_policy_details: "for more details.",
@@ -44,11 +43,18 @@ window.translations = {
     personalized_tips: "Personalized Tips",
     tips_subtitle: "Skincare recommendations based on your analysis",
     no_issues_detected: "No skin issues detected",
+    
+    // NEW: Product Recommendation Keys
+    recommended_products: "Recommended Products",
+    curated_products: "Curated skincare products based on your analysis",
+    filtering_by: "Filtering by:",
+    view_product: "View Product",
+    no_products_found: "No Products Found",
+    no_products_message: "We couldn't find products matching your skin analysis. Check back later for new recommendations."
   },
   fr: {
     title: "Analyse du Visage et Conseils Beauté",
-    description:
-      "Téléchargez une photo ou utilisez votre caméra pour analyser votre visage et obtenir des conseils beauté personnalisés",
+    description: "Téléchargez une photo ou utilisez votre caméra pour analyser votre visage et obtenir des conseils beauté personnalisés",
     lang_en: "EN",
     lang_fr: "FR",
     lang_ar: "AR",
@@ -57,8 +63,7 @@ window.translations = {
     use_camera: "Utiliser la caméra",
     capture_photo: "Capturer une photo",
     stop_camera: "Arrêter la caméra",
-    consent_text:
-      "J'accepte le traitement de ma photo pour une analyse temporaire afin de recevoir des conseils beauté. Je comprends que ma photo ne sera pas stockée.",
+    consent_text: "J'accepte le traitement de ma photo pour une analyse temporaire afin de recevoir des conseils beauté. Je comprends que ma photo ne sera pas stockée.",
     privacy_policy_text: "Lire notre",
     privacy_policy_link: "Politique de confidentialité",
     privacy_policy_details: "pour plus de détails.",
@@ -91,6 +96,14 @@ window.translations = {
     personalized_tips: "Conseils personnalisés",
     tips_subtitle: "Recommandations de soins de la peau basées sur votre analyse",
     no_issues_detected: "Aucun problème de peau détecté",
+
+    // NEW: Product Recommendation Keys
+    recommended_products: "Produits Recommandés",
+    curated_products: "Produits de soins de la peau sélectionnés basés sur votre analyse",
+    filtering_by: "Filtrage par:",
+    view_product: "Voir le produit",
+    no_products_found: "Aucun produit trouvé",
+    no_products_message: "Nous n'avons pas pu trouver de produits correspondant à votre analyse de peau. Revenez plus tard pour de nouvelles recommandations."
   },
   ar: {
     title: "تحليل الوجه ونصائح الجمال",
@@ -136,5 +149,13 @@ window.translations = {
     personalized_tips: "نصائح مخصصة",
     tips_subtitle: "توصيات العناية بالبشرة بناءً على تحليلك",
     no_issues_detected: "لم يتم اكتشاف أي مشاكل في البشرة",
+
+    // NEW: Product Recommendation Keys
+    recommended_products: "المنتجات الموصى بها",
+    curated_products: "منتجات العناية بالبشرة المنتقاة بناءً على تحليلك",
+    filtering_by: "التصفية حسب:",
+    view_product: "عرض المنتج",
+    no_products_found: "لم يتم العثور على منتجات",
+    no_products_message: "لم نتمكن من العثور على منتجات تتطابق مع تحليل بشرتك. تحقق مرة أخرى لاحقاً للحصول على توصيات جديدة."
   },
 }
