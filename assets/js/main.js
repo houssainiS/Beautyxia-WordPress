@@ -361,8 +361,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const tipHTML = `
           <div class="tip-item">
             <div class="tip-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 19v2m0-18v2m15-4h-2m-18 0H1m17-7h-2m-12 0H3m17.657 17.657l-1.414-1.414m-12.728 0l-1.414 1.414m17.657-17.657l-1.414 1.414m-12.728 0l-1.414-1.414"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
             </div>
             <div class="tip-text">${tip}</div>

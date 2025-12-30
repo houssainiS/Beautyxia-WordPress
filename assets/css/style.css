@@ -176,10 +176,11 @@
 }
 
 /* Image preview styling */
+/* FIXED: Image fills height without cutting (floating fixed) */
 .face-analysis-plugin .face-analysis-preview {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 256px; /* Keeps the box strict square */
   border: 2px dashed #c9cccf;
   border-radius: 8px;
   display: flex;
@@ -190,9 +191,9 @@
 }
 
 .face-analysis-plugin .preview-image {
-  object-fit: contain;
-  max-height: 100%;
-  max-width: 100%;
+  width: 100%;
+  height: 100%;       /* Forces image to expand to top and bottom borders */
+  object-fit: contain; /* Ensures FULL image is shown (no cutting/cropping) */
   display: block;
 }
 
