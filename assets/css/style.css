@@ -8,7 +8,6 @@
 .face-analysis-plugin * {
   box-sizing: border-box;
 }
-
 /* Language selector styling */
 .face-analysis-plugin .header-content {
   display: flex;
@@ -25,7 +24,8 @@
   display: flex;
   border: 2px solid #c9cccf;
   border-radius: 8px;
-  overflow: hidden;
+  /* Crucial to hide the focus ring if it spills over */
+  overflow: hidden; 
   width: 96px;
   min-width: 96px;
   max-width: 96px;
@@ -33,6 +33,12 @@
   position: relative;
   box-sizing: border-box;
   direction: ltr;
+  
+  /* Kill text selection at the root */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .face-analysis-plugin .lang-selector-btn {
@@ -57,6 +63,24 @@
   align-items: center;
   justify-content: center;
   direction: ltr;
+
+  /* FIX: REMOVES THE BLUE LINE / BOX ON CLICK */
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+
+  /* Kill text selection on buttons */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Ensure no outline appears even when focusing via keyboard or clicking */
+.face-analysis-plugin .lang-selector-btn:focus,
+.face-analysis-plugin .lang-selector-btn:active {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .face-analysis-plugin .lang-selector-btn:not(:last-child) {
