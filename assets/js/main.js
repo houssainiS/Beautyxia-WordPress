@@ -24,8 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const translations = window.translations || {}
 
-  const faceAnalysisConfig = {
-    apiEndpoint: "http://127.0.0.1:8000/upload/",
+  // Use global config from PHP if available, otherwise fallback to defaults
+  const faceAnalysisConfig = window.faceAnalysisConfig || {
+    apiEndpoint: "https://beautyai.duckdns.org/upload/",
+    feedbackEndpoint: "https://beautyai.duckdns.org/submit-feedback/"
   }
 
   function updateAnalyzeButton() {
@@ -342,6 +344,13 @@ document.addEventListener("DOMContentLoaded", () => {
     showProductRecommendations(data)
 
     document.getElementById("feedbackSection").style.display = "block"
+    // Reset buttons for new analysis
+    const likeBtn = document.getElementById("likeBtn")
+    const dislikeBtn = document.getElementById("dislikeBtn")
+    const feedbackMsg = document.getElementById("feedbackMessage")
+    if (likeBtn) likeBtn.disabled = false
+    if (dislikeBtn) dislikeBtn.disabled = false
+    if (feedbackMsg) feedbackMsg.style.display = "none"
 
     setTimeout(() => {
       resultsSection.scrollIntoView({ behavior: "smooth" })
@@ -455,16 +464,56 @@ document.addEventListener("DOMContentLoaded", () => {
     const likeBtn = document.getElementById("likeBtn")
     const dislikeBtn = document.getElementById("dislikeBtn")
     const feedbackMessage = document.getElementById("feedbackMessage")
+    // Hardcode the external endpoint as requested
+    const feedbackEndpoint = "https://beautyai.duckdns.org/submit-feedback/"
 
-    const handleFeedback = () => {
-        feedbackMessage.textContent = translations[currentLanguage].feedback_thank_you || "Thank you for your feedback!"
-        feedbackMessage.style.display = "block"
+    const handleFeedback = (e, isLike) => {
+        if(e) e.preventDefault()
+        
+        const feedbackType = isLike ? "like" : "dislike"
+        
+        // Prepare the payload for the Python backend
+        const payload = {
+            feedback_type: feedbackType
+        }
+
+        if (feedbackType === "dislike") {
+            // Backend REQUIRED non-empty reason. Using "N/A" to satisfy validation
+            // while keeping it effectively empty for the user interface.
+            payload.dislike_reason = "N/A" 
+        }
+
+        fetch(feedbackEndpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if(!response.ok) {
+                return response.json().then(err => { throw new Error(err.error || "Request failed") })
+            }
+            return response.json()
+        })
+        .then(data => {
+            console.log("Feedback sent successfully:", data)
+        })
+        .catch(err => {
+            console.error("Feedback error:", err)
+        })
+
+        // Update UI immediately
+        if (feedbackMessage) {
+            feedbackMessage.textContent = translations[currentLanguage].feedback_thank_you || "Thank you for your feedback!"
+            feedbackMessage.style.display = "block"
+        }
         if(likeBtn) likeBtn.disabled = true
         if(dislikeBtn) dislikeBtn.disabled = true
     }
 
-    if (likeBtn) likeBtn.addEventListener("click", handleFeedback)
-    if (dislikeBtn) dislikeBtn.addEventListener("click", handleFeedback)
+    if (likeBtn) likeBtn.addEventListener("click", (e) => handleFeedback(e, true))
+    if (dislikeBtn) dislikeBtn.addEventListener("click", (e) => handleFeedback(e, false))
   }
 
   if (analyzeBtn) {
