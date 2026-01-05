@@ -5,8 +5,8 @@
 
 class Face_Analysis_Plugin {
     
-    private $api_endpoint = 'https://beautyai.duckdns.org/upload/';
-    private $feedback_endpoint = 'https://beautyai.duckdns.org/submit-feedback/';
+    private $api_endpoint = 'http://127.0.0.1:8000/upload/';
+    private $feedback_endpoint = 'http://127.0.0.1:8000/submit-feedback/';
     
     public function init() {
         add_action('wp_enqueue_scripts', array($this, 'enqueue_assets'));

@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Use global config from PHP if available, otherwise fallback to defaults
   const faceAnalysisConfig = window.faceAnalysisConfig || {
-    apiEndpoint: "https://beautyai.duckdns.org/upload/",
-    feedbackEndpoint: "https://beautyai.duckdns.org/submit-feedback/"
+    apiEndpoint: "http://127.0.0.1:8000/upload/",
+    feedbackEndpoint: "http://127.0.0.1:8000/submit-feedback/"
   }
 
   function updateAnalyzeButton() {

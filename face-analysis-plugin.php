@@ -22,9 +22,20 @@ define('FACE_ANALYSIS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('FACE_ANALYSIS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('FACE_ANALYSIS_PLUGIN_VERSION', '1.0.0');
 
-// Include required files
+// 1. Include required files
 require_once FACE_ANALYSIS_PLUGIN_DIR . 'includes/class-face-analysis.php';
 require_once FACE_ANALYSIS_PLUGIN_DIR . 'includes/class-tips-generator.php';
+
+// 2. Load the Backoffice (Admin Settings)
+// This checks if we are in the admin dashboard AND if the file exists before loading
+if ( is_admin() ) {
+    $admin_settings_path = FACE_ANALYSIS_PLUGIN_DIR . 'admin/admin-settings.php';
+    if ( file_exists( $admin_settings_path ) ) {
+        require_once $admin_settings_path;
+    }
+}
+
+
 
 // Initialize the plugin
 function face_analysis_init() {
