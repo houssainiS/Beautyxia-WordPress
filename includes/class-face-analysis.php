@@ -56,8 +56,8 @@ class Face_Analysis_Plugin {
             );
             
             // 2. UPDATE: Retrieve the API Key saved during the handshake
-            // (Make sure your admin settings page saves the key with this option name)
-            $stored_api_key = get_option('face_analyzer_api_key', '');
+            // CHANGED: Use 'fa_api_key' to match admin-settings.php
+            $stored_api_key = get_option('fa_api_key', '');
 
             // Localize script with API endpoints, nonce, AND credentials
             wp_localize_script('face-analysis-main', 'faceAnalysisConfig', array(
