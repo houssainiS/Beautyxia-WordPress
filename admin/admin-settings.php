@@ -26,36 +26,39 @@ class FA_Admin_Settings {
     }
 
     public function render_settings_page() {
+        // --- 1. HANDLE INCOMING CONNECTION SUCCESS ---
+        // This catches the API Key from the Django redirect
+        if (isset($_GET['api_key']) && isset($_GET['status']) && $_GET['status'] === 'success') {
+            update_option('fa_api_key', sanitize_text_field($_GET['api_key']));
+            
+            // Redirect to a clean URL so the API key doesn't stay in the browser bar
+            echo '<script>window.location.href="' . admin_url('admin.php?page=face-analyzer&connection=success') . '";</script>';
+            exit;
+        }
+
         $api_key = get_option('fa_api_key');
         $site_url = get_site_url();
         $admin_email = get_option('admin_email');
 
-        // --- HANDLE DISCONNECT REQUEST ---
+        // --- 2. HANDLE DISCONNECT REQUEST ---
         if (isset($_POST['fa_disconnect'])) {
             if ($api_key) {
+                // Notify Django to deactivate
                 wp_remote_post("http://127.0.0.1:8000/wordpress/deactivate/", array(
                     'method'    => 'POST',
                     'timeout'   => 15,
                     'redirection' => 5,
                     'httpversion' => '1.0',
                     'blocking'    => true,
-                    'headers'     => array(),
                     'body'        => array(
                         'shop_url' => $site_url,
                         'api_key'  => $api_key,
                     ),
-                    'cookies'     => array()
                 ));
             }
 
             delete_option('fa_api_key');
             $api_key = false;
-        }
-
-        // --- HANDLE INCOMING CONNECTION SUCCESS ---
-        elseif (isset($_GET['api_key']) && isset($_GET['status']) && $_GET['status'] === 'success') {
-            update_option('fa_api_key', sanitize_text_field($_GET['api_key']));
-            $api_key = get_option('fa_api_key');
         }
 
         $django_connect_url = "http://127.0.0.1:8000/wordpress/connect/";
@@ -67,15 +70,12 @@ class FA_Admin_Settings {
         $acne_issues = array('blackhead', 'cystic', 'folliculitis', 'keloid', 'milium', 'papular', 'purulent', 'acne_scars', 'acne', 'pimple', 'spot');
         ?>
         <div class="fa-admin-container">
-            <!-- Header -->
             <div class="fa-header-center">
                 <h1 class="fa-title-centered">Beautyxia Dashboard</h1>
                 <p class="fa-subtitle-centered">Manage your AI connection and product recommendations</p>
             </div>
 
-            <!-- Main Content -->
             <div class="fa-content">
-                <!-- Connection Status Card -->
                 <div class="fa-card fa-connection-card">
                     <div class="fa-card-header">
                         <h2 class="fa-card-title">
@@ -129,7 +129,6 @@ class FA_Admin_Settings {
                     </div>
                 </div>
 
-                <!-- Product Tags Guide Card -->
                 <div class="fa-card fa-tags-card">
                     <div class="fa-card-header">
                         <h2 class="fa-card-title">
@@ -142,9 +141,7 @@ class FA_Admin_Settings {
                             The recommendation system works based on product names and tags. Adding specific tags makes recommendations more accurate. You can add tags for skin types, concerns, and acne-related issues.
                         </p>
 
-                        <!-- Removed tab navigation and manage tags form, keeping only the tag guide -->
                         <div class="fa-tag-categories">
-                            <!-- Skin Types -->
                             <div class="fa-tag-category">
                                 <h3 class="fa-category-title">Skin Types</h3>
                                 <div class="fa-tag-list">
@@ -155,7 +152,6 @@ class FA_Admin_Settings {
                                 <p class="fa-category-description">Use these tags to indicate the skin type a product is suitable for.</p>
                             </div>
 
-                            <!-- Skin Concerns -->
                             <div class="fa-tag-category">
                                 <h3 class="fa-category-title">Skin Concerns</h3>
                                 <div class="fa-tag-list">
@@ -166,7 +162,6 @@ class FA_Admin_Settings {
                                 <p class="fa-category-description">Use these tags to indicate what skin concerns the product addresses.</p>
                             </div>
 
-                            <!-- Acne Issues -->
                             <div class="fa-tag-category">
                                 <h3 class="fa-category-title">Acne & Related Issues</h3>
                                 <div class="fa-tag-list">
@@ -180,7 +175,6 @@ class FA_Admin_Settings {
                     </div>
                 </div>
 
-                <!-- Shortcode Card -->
                 <div class="fa-card">
                     <div class="fa-card-header">
                         <h2 class="fa-card-title">
@@ -198,19 +192,10 @@ class FA_Admin_Settings {
                 </div>
             </div>
 
-            <!-- Footer -->
             <div class="fa-footer">
                 <p>Face Analyzer v1.0 | Powered by MakeupAI</p>
             </div>
         </div>
-
-        <style>
-            /* ... styles embedded below ... */
-        </style>
-
-        <script>
-            // ... scripts embedded below ... */
-        </script>
         <?php
     }
 }

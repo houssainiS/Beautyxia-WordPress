@@ -27,7 +27,6 @@ require_once FACE_ANALYSIS_PLUGIN_DIR . 'includes/class-face-analysis.php';
 require_once FACE_ANALYSIS_PLUGIN_DIR . 'includes/class-tips-generator.php';
 
 // 2. Load the Backoffice (Admin Settings)
-// This checks if we are in the admin dashboard AND if the file exists before loading
 if ( is_admin() ) {
     $admin_settings_path = FACE_ANALYSIS_PLUGIN_DIR . 'admin/admin-settings.php';
     if ( file_exists( $admin_settings_path ) ) {
@@ -35,9 +34,7 @@ if ( is_admin() ) {
     }
 }
 
-
-
-// Initialize the plugin
+// 3. Initialize the plugin
 function face_analysis_init() {
     $plugin = new Face_Analysis_Plugin();
     $plugin->init();
@@ -46,12 +43,10 @@ add_action('plugins_loaded', 'face_analysis_init');
 
 // Activation hook
 register_activation_hook(__FILE__, function() {
-    // Plugin activation code if needed
     do_action('face_analysis_activated');
 });
 
 // Deactivation hook
 register_deactivation_hook(__FILE__, function() {
-    // Plugin deactivation code if needed
     do_action('face_analysis_deactivated');
 });

@@ -5,7 +5,8 @@
 
 class Face_Analysis_Plugin {
     
-    private $api_endpoint = 'http://127.0.0.1:8000/upload/';
+    // 1. UPDATE: Changed endpoint to the new WordPress-specific view
+    private $api_endpoint = 'http://127.0.0.1:8000/wordpress/analyze/';
     private $feedback_endpoint = 'http://127.0.0.1:8000/submit-feedback/';
     
     public function init() {
@@ -54,12 +55,20 @@ class Face_Analysis_Plugin {
                 true
             );
             
-            // Localize script with API endpoints and nonce
+            // 2. UPDATE: Retrieve the API Key saved during the handshake
+            // (Make sure your admin settings page saves the key with this option name)
+            $stored_api_key = get_option('face_analyzer_api_key', '');
+
+            // Localize script with API endpoints, nonce, AND credentials
             wp_localize_script('face-analysis-main', 'faceAnalysisConfig', array(
                 'apiEndpoint' => $this->api_endpoint,
                 'feedbackEndpoint' => $this->feedback_endpoint,
                 'nonce' => wp_create_nonce('face_analysis_nonce'),
                 'siteUrl' => site_url(),
+                
+                // --- NEW FIELDS FOR DJANGO AUTH ---
+                'apiKey' => $stored_api_key,
+                'shopUrl' => get_site_url(), // Sends the WP site URL as the identifier
             ));
         }
     }

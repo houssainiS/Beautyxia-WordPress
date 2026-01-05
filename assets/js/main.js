@@ -24,10 +24,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const translations = window.translations || {}
 
-  // Use global config from PHP if available, otherwise fallback to defaults
+  // --- CONFIGURATION UPDATE ---
+  // We now expect PHP to pass 'apiKey' and 'shopUrl' in this object.
+  // Updated default endpoint to point to the new WordPress-specific view.
   const faceAnalysisConfig = window.faceAnalysisConfig || {
-    apiEndpoint: "http://127.0.0.1:8000/upload/",
-    feedbackEndpoint: "http://127.0.0.1:8000/submit-feedback/"
+    apiEndpoint: "http://127.0.0.1:8000/wordpress/analyze/", 
+    feedbackEndpoint: "http://127.0.0.1:8000/submit-feedback/",
+    apiKey: "", // Should be populated by PHP
+    shopUrl: "" // Should be populated by PHP
   }
 
   function updateAnalyzeButton() {
@@ -516,12 +520,23 @@ document.addEventListener("DOMContentLoaded", () => {
     if (dislikeBtn) dislikeBtn.addEventListener("click", (e) => handleFeedback(e, false))
   }
 
+  // --- KEY CHANGE: Updated Analyze Logic ---
   if (analyzeBtn) {
     analyzeBtn.addEventListener("click", () => {
       if (!uploadedFile || !consentCheckbox.checked) return
 
       const formData = new FormData()
       formData.append("photo", uploadedFile)
+
+      // 1. ADD CREDENTIALS TO REQUEST
+      // We look for 'apiKey' or 'api_key' in the config
+      if (faceAnalysisConfig.apiKey || faceAnalysisConfig.api_key) {
+        formData.append("api_key", faceAnalysisConfig.apiKey || faceAnalysisConfig.api_key)
+      }
+      
+      if (faceAnalysisConfig.shopUrl || faceAnalysisConfig.shop_url) {
+        formData.append("shop_url", faceAnalysisConfig.shopUrl || faceAnalysisConfig.shop_url)
+      }
 
       hideResults()
       loadingSection.style.display = "block"
@@ -542,7 +557,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (data.error) {
           console.error("API Error:", data.error)
-          alert("Error: " + data.error)
+          // Handle specific quota error or generic error
+          alert(data.message ? `Error: ${data.message}` : `Error: ${data.error}`)
         } else {
           displayResults(data)
         }
