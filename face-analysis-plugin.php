@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name: Face Analysis & Beauty Tips
- * Plugin URI: https://example.com/face-analysis
+ * Plugin Name: Beautyxia
+ * Plugin URI: https://beautyai.duckdns.org/
  * Description: AI-powered face analysis tool that provides personalized beauty tips based on skin type, eye color, and acne severity.
  * Version: 1.0.0
- * Author: Your Name
- * Author URI: https://example.com
+ * Author: Beautyxia
+ * Author URI: https://beautyai.duckdns.org/
  * License: GPL v2 or later
- * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * License URI: https://beautyai.duckdns.org/privacy-policy/
  * Text Domain: face-analysis-plugin
  * Domain Path: /languages
  */

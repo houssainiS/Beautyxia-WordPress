@@ -535,3 +535,77 @@
     flex-direction: column;
   }
 }
+
+/* ===== Quota & Plan Dashboard Styles ===== */
+
+.fa-quota-card {
+  border-left: 4px solid var(--fa-success); /* Use success green for the usage card */
+}
+
+.fa-quota-info {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.fa-plan-badge {
+  background-color: var(--fa-primary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.fa-quota-main {
+  margin: 32px 0;
+}
+
+.fa-remaining-qty {
+  display: block;
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--fa-text-primary);
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.fa-remaining-label {
+  font-size: 16px;
+  color: var(--fa-text-secondary);
+  font-weight: 400;
+}
+
+/* Progress Bar */
+.fa-progress-container {
+  height: 12px;
+  background-color: var(--fa-bg);
+  border: 1px solid var(--fa-border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fa-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--fa-primary), var(--fa-success));
+  border-radius: 10px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fa-usage-subtext {
+  font-size: 13px;
+  color: var(--fa-text-light);
+  margin: 0;
+}
+
+/* Mobile adjustments for the quota display */
+@media (max-width: 768px) {
+  .fa-remaining-qty {
+    font-size: 40px;
+  }
+}
+/* =================== */
