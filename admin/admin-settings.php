@@ -33,7 +33,7 @@ class FA_Admin_Settings {
 
         // Note: You should ensure your Django urls.py has a 'status' endpoint 
         // that returns plan and usage details.
-        $status_url = "http://127.0.0.1:8000/wordpress/status/";
+        $status_url = "https://beautyai.duckdns.org/wordpress/status/";
         $response = wp_remote_get(add_query_arg(array(
             'shop_url' => $site_url,
             'api_key'  => $api_key
@@ -59,7 +59,7 @@ class FA_Admin_Settings {
         // --- 2. HANDLE DISCONNECT REQUEST ---
         if (isset($_POST['fa_disconnect'])) {
             if ($api_key) {
-                wp_remote_post("http://127.0.0.1:8000/wordpress/deactivate/", array(
+                wp_remote_post("https://beautyai.duckdns.org/wordpress/deactivate/", array(
                     'body' => array(
                         'shop_url' => $site_url,
                         'api_key'  => $api_key,
@@ -77,7 +77,7 @@ class FA_Admin_Settings {
         $limit = $quota['usage']['limit'] ?? 100;
         $remaining = max(0, $limit - $used);
 
-        $django_connect_url = "http://127.0.0.1:8000/wordpress/connect/?shop_url=" . urlencode($site_url) . "&admin_email=" . urlencode($admin_email);
+        $django_connect_url = "https://beautyai.duckdns.org/wordpress/connect/?shop_url=" . urlencode($site_url) . "&admin_email=" . urlencode($admin_email);
 
         $skin_types = array('dry', 'normal', 'oily');
         $skin_concerns = array('darkcircle', 'skinredness', 'melasma', 'vascular', 'wrinkle');

@@ -6,8 +6,8 @@
 class Face_Analysis_Plugin {
     
     // 1. UPDATE: Changed endpoint to the new WordPress-specific view
-    private $api_endpoint = 'http://127.0.0.1:8000/wordpress/analyze/';
-    private $feedback_endpoint = 'http://127.0.0.1:8000/submit-feedback/';
+    private $api_endpoint = 'https://beautyai.duckdns.org/wordpress/analyze/';
+    private $feedback_endpoint = 'https://beautyai.duckdns.org/submit-feedback/';
     
     public function init() {
         add_action('wp_enqueue_scripts', array($this, 'enqueue_assets'));

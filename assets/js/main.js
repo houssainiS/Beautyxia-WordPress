@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // We now expect PHP to pass 'apiKey' and 'shopUrl' in this object.
   // Updated default endpoint to point to the new WordPress-specific view.
   const faceAnalysisConfig = window.faceAnalysisConfig || {
-    apiEndpoint: "http://127.0.0.1:8000/wordpress/analyze/", 
-    feedbackEndpoint: "http://127.0.0.1:8000/submit-feedback/",
+    apiEndpoint: "https://beautyai.duckdns.org/wordpress/analyze/", 
+    feedbackEndpoint: "https://beautyai.duckdns.org/submit-feedback/",
     apiKey: "", // Should be populated by PHP
     shopUrl: "" // Should be populated by PHP
   }
